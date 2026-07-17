@@ -164,10 +164,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GenerateCity
   buildingPrefabs:
-  - {fileID: 919132149155446097, guid: ac8fb1533e62aaf4bb35e614904aa43f, type: 3}
-  - {fileID: 919132149155446097, guid: 222cdccf62c07e54eb2f821317ad32f4, type: 3}
-  - {fileID: 919132149155446097, guid: 8faa4251119880347ab17b5df18e483b, type: 3}
-  - {fileID: 919132149155446097, guid: 41221b640a2ae474e8f614a60cc7ce2d, type: 3}
+  - {fileID: 6498509631086979164, guid: 0df430402a15a1f4d8efab73233b3407, type: 3}
+  - {fileID: 8347979240317892042, guid: bace9ae65f0b67567b4ffd7cea62ec7f, type: 3}
+  - {fileID: 3277017716083948924, guid: 75118a24bbe0155a6887bc523fc07b04, type: 3}
+  - {fileID: 4197979501980009556, guid: 4f6a37adab530781c82c161d3478b323, type: 3}
   roadIntersectionPrefab: {fileID: 919132149155446097, guid: 3fcf6816465083698ac5f47a894882af, type: 3}
   roadStraightPrefab: {fileID: 919132149155446097, guid: c140c47eef6aeceaf932a97e69f42cea, type: 3}
   cityWidth: 15

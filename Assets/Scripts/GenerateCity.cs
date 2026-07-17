@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using JetBrains.Annotations;
-using Unity.Mathematics;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public class GenerateCity : MonoBehaviour
@@ -28,6 +25,7 @@ public class GenerateCity : MonoBehaviour
                 GameObject prefab;
                 Vector3 position = new Vector3(x, 0, y);
                 Quaternion rotation = Quaternion.identity;
+                Vector3 scale = new Vector3(tileWidth, tileHeight, tileWidth);
 
                 int _i = i - 1;
                 int _j = j - 1;
@@ -60,7 +58,7 @@ public class GenerateCity : MonoBehaviour
                 }
 
                 GameObject newTile = Instantiate(prefab, position, rotation, transform);
-                newTile.transform.localScale = new Vector3(tileWidth, tileHeight, tileWidth);
+                newTile.transform.localScale = scale;
             }
         }
     }
