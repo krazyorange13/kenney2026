@@ -26,7 +26,12 @@ public class Player : MonoBehaviour
           );
 
           Vector3 direction = target - transform.position;
-          transform.rotation = Quaternion.LookRotation(direction);
+          Quaternion targetRotation = Quaternion.LookRotation(direction);
+          transform.rotation = Quaternion.Slerp(
+              transform.rotation,
+              targetRotation,
+              10f * Time.deltaTime
+          );
         }
       }
     }
