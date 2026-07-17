@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BotController : MonoBehaviour
 {
+
+    public List<GameObject> botPrefabs = new List<GameObject>();
     private float speed = 6;
     private float turnSpeed = 90f;
     public float scale = 1;
@@ -10,6 +13,7 @@ public class BotController : MonoBehaviour
 
     void Start()
     {
+        SpawnPrefabAsChild();
         scale = Random.Range(1f, 5f);
         transform.localScale = Vector3.one * scale;
         targetRotation = transform.rotation;
@@ -32,5 +36,13 @@ public class BotController : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
 
         transform.position += transform.forward * speed * scale * Time.deltaTime;
+    }
+
+    public void SpawnPrefabAsChild()
+    {
+        if (botPrefabs.Count == 0) return;
+        int rng = Random.Range(0, botPrefabs.Count - 1);
+        GameObject prefabToSpawn = botPrefabs[rng];
+        Instantiate(prefabToSpawn, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), this.transform);
     }
 }
