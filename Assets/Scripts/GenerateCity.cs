@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Unity.Mathematics;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public class GenerateCity : MonoBehaviour
@@ -49,8 +52,9 @@ public class GenerateCity : MonoBehaviour
                     }
                     else
                     {
-                        prefab = buildingPrefabs[0];
-                        float randomRotation = Random.Range(0, 4) * 90.0f;
+                        prefab = GetBuilding(i, j);
+                        float randomRotation = UnityEngine.Random.Range(0, 4) * 90.0f;
+                        position.y += 0.25f;
                         rotation = Quaternion.Euler(new Vector3(0.0f, randomRotation, 0.0f));
                     }
                 }
@@ -59,5 +63,30 @@ public class GenerateCity : MonoBehaviour
                 newTile.transform.localScale = new Vector3(tileWidth, tileHeight, tileWidth);
             }
         }
+    }
+
+    GameObject GetBuilding(int i, int j)
+    {
+        int height;
+        height = Mathf.FloorToInt(GetBuildingHeight(i, j, 0.0f, 4.0f));
+        if (UnityEngine.Random.value >= 0.25)
+        {
+            height += UnityEngine.Random.Range(-1, 2);
+        }
+        height = Mathf.Max(Mathf.Min(height, 3), 0);
+        return buildingPrefabs[height];
+    }
+
+    float GetBuildingHeight(int i, int j, float mean = 0.0f, float stdev = 1.0f)
+    {
+        float s = 2.5f;
+        float ci = cityWidth / 2.0f - 1;
+        float cj = cityHeight / 2.0f - 1;
+        float di = i - ci;
+        float dj = j - cj;
+        float exp = -((di * di) + (dj * dj)) / (2.0f * s * s);
+        float gaus = Mathf.Exp(exp);
+        float height = mean + stdev * gaus;
+        return height;
     }
 }

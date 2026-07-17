@@ -170,8 +170,8 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 41221b640a2ae474e8f614a60cc7ce2d, type: 3}
   roadIntersectionPrefab: {fileID: 919132149155446097, guid: 3fcf6816465083698ac5f47a894882af, type: 3}
   roadStraightPrefab: {fileID: 919132149155446097, guid: c140c47eef6aeceaf932a97e69f42cea, type: 3}
-  cityWidth: 11
-  cityHeight: 11
+  cityWidth: 15
+  cityHeight: 15
   tileWidth: 25
   tileHeight: 25
 --- !u!1 &602076916
