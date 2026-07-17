@@ -4,23 +4,25 @@ using UnityEngine;
 public class BotController : MonoBehaviour
 {
 
-    public List<GameObject> botPrefabs = new List<GameObject>();
+    private BotSpawner spawner;
     private float speed = 6;
     private float turnSpeed = 90f;
     public float scale = 1;
     private float timeToDirChange = 0;
     private Quaternion targetRotation;
+    private BoxCollider boxCollider;
+
 
     void Start()
     {
-        SpawnPrefabAsChild();
-        scale = Random.Range(1f, 5f);
-        transform.localScale = Vector3.one * scale;
         targetRotation = transform.rotation;
+        this.boxCollider = this.GetComponent<BoxCollider>();
     }
 
     void Update()
     {
+        transform.localScale = Vector3.one * scale;
+
         timeToDirChange -= Time.deltaTime;
 
         if (timeToDirChange <= 0)
@@ -35,15 +37,83 @@ public class BotController : MonoBehaviour
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
 
-        transform.position += transform.forward * speed * scale * Time.deltaTime;
+        Vector3 movement = transform.forward * speed * scale * Time.deltaTime;
+        Vector3 nextPosition = transform.position + movement;
+
+        if (spawner != null)
+        {
+            if (nextPosition.x < spawner.minX 
+            || nextPosition.x > spawner.maxX 
+            || nextPosition.z < spawner.minZ 
+            || nextPosition.z > spawner.maxZ)
+            {
+                Vector3 center = new Vector3((spawner.minX + spawner.maxX) / 2f, transform.position.y, (spawner.minZ + spawner.maxZ) / 2f);
+                targetRotation = Quaternion.LookRotation(center - transform.position);
+            }
+        }
+
+        transform.position = nextPosition;
+
+
+        foreach (GameObject bot in GameObject.FindGameObjectsWithTag("Bot"))
+        {
+            if (bot == gameObject)
+                continue;
+
+            BoxCollider other = bot.GetComponent<BoxCollider>();
+
+            if (boxCollider.bounds.Intersects(other.bounds))
+            {
+                
+                // check that the two opposite corners are contained within this bot's collider
+
+                if (ContainsBot2D(this.boxCollider, other)) {
+                    Destroy(bot);
+                    Debug.Log($"DIE: {bot.name}");
+                }
+            }
+        }
+    
     }
 
-    public void SpawnPrefabAsChild()
+    public BotController setSpawner(BotSpawner spawner)
     {
-        if (botPrefabs.Count == 0) return;
-        int rng = Random.Range(0, botPrefabs.Count - 1);
-        GameObject prefabToSpawn = botPrefabs[rng];
-        GameObject go = Instantiate(prefabToSpawn, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), this.transform);
-        go.transform.localPosition = new Vector3(0, 0, 0);
+        this.spawner = spawner;
+        return this;
+    }
+
+    bool ContainsBot2D(BoxCollider mine, BoxCollider other)
+    {
+        Vector3 half = other.size * 0.5f;
+
+        Vector3[] corners =
+        {
+            new(-half.x, 0, -half.z),
+            new(-half.x, 0,  half.z),
+            new( half.x, 0, -half.z),
+            new( half.x, 0,  half.z),
+        };
+
+        Vector3 myHalf = mine.size * 0.5f;
+        Vector3 myMin = mine.center - myHalf;
+        Vector3 myMax = mine.center + myHalf;
+
+        foreach (Vector3 corner in corners)
+        {
+            // Corner in world space
+            Vector3 world = other.transform.TransformPoint(other.center + corner);
+
+            // Convert to this bot's local space
+            Vector3 local = mine.transform.InverseTransformPoint(world);
+
+            // Check only X and Z
+            if (local.x < myMin.x || local.x > myMax.x ||
+                local.z < myMin.z || local.z > myMax.z)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
