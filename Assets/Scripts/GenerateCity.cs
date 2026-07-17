@@ -4,8 +4,11 @@ using UnityEngine;
 public class GenerateCity : MonoBehaviour
 {
     public List<GameObject> buildingPrefabs;
+    public GameObject buildingFillPrefab;
     public GameObject roadIntersectionPrefab;
     public GameObject roadStraightPrefab;
+
+    public float spread = 1.0f;
 
     public int cityWidth;
     public int cityHeight;
@@ -50,6 +53,9 @@ public class GenerateCity : MonoBehaviour
                     }
                     else
                     {
+                        GameObject fillPrefab = Instantiate(buildingFillPrefab, position, rotation, transform);
+                        fillPrefab.transform.localScale = scale;
+
                         prefab = GetBuilding(i, j);
                         float randomRotation = UnityEngine.Random.Range(0, 4) * 90.0f;
                         position.y += 0.25f;
@@ -66,18 +72,18 @@ public class GenerateCity : MonoBehaviour
     GameObject GetBuilding(int i, int j)
     {
         int height;
-        height = Mathf.FloorToInt(GetBuildingHeight(i, j, 0.0f, 4.0f));
+        height = Mathf.FloorToInt(GetBuildingHeight(i, j, 0.0f, (float)buildingPrefabs.Count));
         if (UnityEngine.Random.value >= 0.25)
         {
             height += UnityEngine.Random.Range(-1, 2);
         }
-        height = Mathf.Max(Mathf.Min(height, 3), 0);
+        height = Mathf.Max(Mathf.Min(height, buildingPrefabs.Count - 1), 0);
         return buildingPrefabs[height];
     }
 
     float GetBuildingHeight(int i, int j, float mean = 0.0f, float stdev = 1.0f)
     {
-        float s = 2.5f;
+        float s = spread * cityWidth * 15f / 51f;
         float ci = cityWidth / 2.0f - 1;
         float cj = cityHeight / 2.0f - 1;
         float di = i - ci;

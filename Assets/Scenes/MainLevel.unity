@@ -164,14 +164,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GenerateCity
   buildingPrefabs:
+  - {fileID: 1026884310372715113, guid: 05abfd5a1407376a1a67bcb71a28c280, type: 3}
+  - {fileID: 591656774674232701, guid: 574f40579624d9ab99376b7ee03f09ce, type: 3}
+  - {fileID: 5372773251198239424, guid: fb4e829a9d73c633c90eb31b263c9c50, type: 3}
+  - {fileID: 6947260454140379915, guid: 5aa88688a104717b0979a84ec520ab7c, type: 3}
+  - {fileID: 1905685609218324396, guid: d514577c414d880e7a78b81223a1ffb8, type: 3}
+  - {fileID: 1376467081764778970, guid: c97010f4308a9d1b6828820c2e466a6a, type: 3}
+  - {fileID: 7907829355881356392, guid: 03fdcbef96bec8f2e9ccdd34a7c3ab32, type: 3}
+  - {fileID: 6498509631086979164, guid: 0df430402a15a1f4d8efab73233b3407, type: 3}
   - {fileID: 6498509631086979164, guid: 0df430402a15a1f4d8efab73233b3407, type: 3}
   - {fileID: 8347979240317892042, guid: bace9ae65f0b67567b4ffd7cea62ec7f, type: 3}
   - {fileID: 3277017716083948924, guid: 75118a24bbe0155a6887bc523fc07b04, type: 3}
   - {fileID: 4197979501980009556, guid: 4f6a37adab530781c82c161d3478b323, type: 3}
+  buildingFillPrefab: {fileID: 919132149155446097, guid: a4daa9e81d62d4e91818fd5fff999aa0, type: 3}
   roadIntersectionPrefab: {fileID: 919132149155446097, guid: 3fcf6816465083698ac5f47a894882af, type: 3}
   roadStraightPrefab: {fileID: 919132149155446097, guid: c140c47eef6aeceaf932a97e69f42cea, type: 3}
-  cityWidth: 15
-  cityHeight: 15
+  spread: 1
+  cityWidth: 21
+  cityHeight: 21
   tileWidth: 25
   tileHeight: 25
 --- !u!1 &602076916
