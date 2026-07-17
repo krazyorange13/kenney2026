@@ -30,7 +30,7 @@ public class BotController : MonoBehaviour
             Vector3 direction = new Vector3(random.x, 0f, random.y);
             targetRotation = Quaternion.LookRotation(direction);
 
-            timeToDirChange = 3f;
+            timeToDirChange = Random.Range(2f, 5f);
         }
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
@@ -43,6 +43,7 @@ public class BotController : MonoBehaviour
         if (botPrefabs.Count == 0) return;
         int rng = Random.Range(0, botPrefabs.Count - 1);
         GameObject prefabToSpawn = botPrefabs[rng];
-        Instantiate(prefabToSpawn, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), this.transform);
+        GameObject go = Instantiate(prefabToSpawn, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), this.transform);
+        go.transform.localPosition = new Vector3(0, 0, 0);
     }
 }
