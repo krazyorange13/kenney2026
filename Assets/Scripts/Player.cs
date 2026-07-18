@@ -40,7 +40,6 @@ public class Player : MonoBehaviour
 
         Movement();
         Transparent();
-        Eating();
     }
 
     void Movement()
@@ -156,22 +155,22 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Eating()
+    void OnCollisionStay(Collision collision)
     {
-        foreach (GameObject bot in GameObject.FindGameObjectsWithTag("Edible"))
+        Debug.Log("I LOVE MEN!!!");
+        GameObject other = collision.gameObject;
+        Edible otherEdible = other.GetComponent<Edible>();
+        if (otherEdible != null)
         {
-            if (bot == gameObject)
-                continue;
-
-            BoxCollider other = bot.GetComponent<BoxCollider>();
+            Debug.Log("I LOVE MEN");
+            BoxCollider otherBox = other.GetComponent<BoxCollider>();
 
             // check that the two opposite corners are contained within this bot's collider
-            if (ContainsBot2D(this.boxCollider, other))
+            if (ContainsBot2D(boxCollider, otherBox))
             {
                 audioSource.PlayOneShot(growthAudio);
-                Destroy(bot);
+                Destroy(other);
                 Edible myEdible = GetComponent<Edible>();
-                Edible otherEdible = bot.GetComponent<Edible>();
                 float prevScale = myEdible.scale;
                 myEdible.scale += otherEdible.scale / 2;
                 Debug.Log($"Eating before: {prevScale} after: {myEdible.scale}");
@@ -216,7 +215,7 @@ public class Player : MonoBehaviour
 
     public void SendScore()
     {
-        Leaderboard.SubmitScore((int) gameObject.GetComponent<Edible>().scale);
+        Leaderboard.SubmitScore((int)gameObject.GetComponent<Edible>().scale);
     }
 }
 

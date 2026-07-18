@@ -372,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1176404128927777463, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: m_Center.y
-      value: 0.87628794
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1176404128927777463, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: m_Center.z
@@ -477,7 +477,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3834298587729601747, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 976540890}
   m_SourcePrefab: {fileID: 100100000, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
 --- !u!1 &656271312
 GameObject:
@@ -828,7 +831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &973995607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,6 +895,33 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3834298587729601747, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
   m_PrefabInstance: {fileID: 632367165}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &976540890
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976540884}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1043468115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,7 +1466,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
   player: {fileID: 976540884}
-  offset: {x: -75, y: 150, z: -35}
+  cameraDistance: 10
+  sizeMultiplier: 2
   smoothSpeed: 0.02
 --- !u!114 &2049215333
 MonoBehaviour:

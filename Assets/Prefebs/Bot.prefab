@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8696126690901152849}
   - component: {fileID: 5604647449313035437}
+  - component: {fileID: 7812905340701586159}
   - component: {fileID: 6809810621288528465}
   - component: {fileID: -3775400199036906898}
   - component: {fileID: -7360499628976098056}
@@ -47,8 +48,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db5e0a17019fc6479738ad9a0353c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotController
-  scale: 1
   eatClip: {fileID: 8300000, guid: ab77fe429ced8d4769c202e5c4978aff, type: 3}
+--- !u!54 &7812905340701586159
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6081166618977227607}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6809810621288528465
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -179,3 +206,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 917ae06f9720be048a5bb0ccf4cfb90b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  scale: 1
