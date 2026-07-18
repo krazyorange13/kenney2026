@@ -75,6 +75,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 591c1ebb616a2a04baea669fceab0b72, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5592640833385684237}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 591c1ebb616a2a04baea669fceab0b72, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2916105779400450611}
   m_SourcePrefab: {fileID: 100100000, guid: 591c1ebb616a2a04baea669fceab0b72, type: 3}
 --- !u!1 &7638341156916264349 stripped
 GameObject:
@@ -102,3 +105,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.3028593, y: 0.77274144, z: 0.9135879}
   m_Center: {x: 0, y: 0.38637072, z: -0.006793946}
+--- !u!114 &-2916105779400450611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7638341156916264349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286c8294b285622e387c0372a4c5fd04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoTransparency

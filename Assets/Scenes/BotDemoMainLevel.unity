@@ -151,9 +151,29 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1509053142309718987, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2356062658235602529, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458291809167141663, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3834298587729601747, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834298587729601747, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108157762522439653, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4269865798072476078, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -195,6 +215,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4409533325412017776, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4476504124815070452, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: camera
       value: 
@@ -202,6 +226,14 @@ PrefabInstance:
     - target: {fileID: 4476504124815070452, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: movementSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5319278286139801924, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789947242294973195, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -505,7 +537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
   player: {fileID: 976540884}
-  offset: {x: -15, y: 30, z: -9}
+  offset: {x: -75, y: 150, z: -35}
   smoothSpeed: 0.02
 --- !u!114 &2049215333
 MonoBehaviour:

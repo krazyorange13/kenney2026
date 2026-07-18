@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4269865798072476078}
   - component: {fileID: 1176404128927777463}
   - component: {fileID: 4476504124815070452}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player
   m_TagString: Edible
   m_Icon: {fileID: 0}
