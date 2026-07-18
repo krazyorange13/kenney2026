@@ -10,11 +10,21 @@ public class Player : MonoBehaviour
 
   private List<Renderer> currentObstructions = new List<Renderer>();
   private float fadeAlpha = 0.3f;
+  public float scale = 2;
+  private BoxCollider boxCollider;
 
-  void Update()
+    void Start()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+    }
+
+    void Update()
   {
+    transform.localScale = Vector3.one * scale;
+    
     Movement();
     Transparent();
+    Eating();
   }
 
   void Movement() {
@@ -82,6 +92,65 @@ public class Player : MonoBehaviour
     Color color = mat.color;
     color.a = alpha;
     mat.color = color;
+  }
+
+  void Eating()
+  {
+    foreach (GameObject bot in GameObject.FindGameObjectsWithTag("Edible"))
+    {
+        if (bot == gameObject)
+            continue;
+
+        BoxCollider other = bot.GetComponent<BoxCollider>();
+
+        if (boxCollider.bounds.Intersects(other.bounds))
+        {
+            
+            // check that the two opposite corners are contained within this bot's collider
+            if (ContainsBot2D(this.boxCollider, other)) {
+                Destroy(bot);
+                float myVolume = scale * scale * scale;
+                BotController otherController = bot.GetComponent<BotController>();
+                float otherVolume = otherController.scale * otherController.scale * otherController.scale;
+                scale = Mathf.Pow(myVolume + otherVolume, 1f / 3f);
+            }
+        }
+    }
+  }
+
+  bool ContainsBot2D(BoxCollider mine, BoxCollider other)
+  {
+      Vector3 half = other.size * 0.5f;
+
+      Vector3[] corners =
+      {
+          new(-half.x, 0, -half.z),
+          new(-half.x, 0,  half.z),
+          new( half.x, 0, -half.z),
+          new( half.x, 0,  half.z),
+      };
+
+      Vector3 myHalf = mine.size * 0.5f;
+      Vector3 myMin = mine.center - myHalf;
+      Vector3 myMax = mine.center + myHalf;
+
+      foreach (Vector3 corner in corners)
+      {
+          // Corner in world space
+          Vector3 world = other.transform.TransformPoint(other.center + corner);
+
+          // Convert to this bot's local space
+          Vector3 local = mine.transform.InverseTransformPoint(world);
+
+          // Check only X and Z
+          if (local.x < myMin.x || local.x > myMax.x ||
+              local.z < myMin.z || local.z > myMax.z)
+          {
+              return false;
+          }
+      }
+
+      return true;
   }
 }
 

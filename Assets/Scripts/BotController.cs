@@ -37,7 +37,7 @@ public class BotController : MonoBehaviour
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
 
-        Vector3 movement = transform.forward * speed * scale * Time.deltaTime;
+        Vector3 movement = transform.forward * speed * Time.deltaTime;
         Vector3 nextPosition = transform.position + movement;
 
         if (spawner != null)
@@ -55,7 +55,7 @@ public class BotController : MonoBehaviour
         transform.position = nextPosition;
 
 
-        foreach (GameObject bot in GameObject.FindGameObjectsWithTag("Bot"))
+        foreach (GameObject bot in GameObject.FindGameObjectsWithTag("Edible"))
         {
             if (bot == gameObject)
                 continue;
@@ -66,10 +66,12 @@ public class BotController : MonoBehaviour
             {
                 
                 // check that the two opposite corners are contained within this bot's collider
-
                 if (ContainsBot2D(this.boxCollider, other)) {
                     Destroy(bot);
-                    Debug.Log($"DIE: {bot.name}");
+                    float myVolume = scale * scale * scale;
+                    BotController otherController = bot.GetComponent<BotController>();
+                    float otherVolume = otherController.scale * otherController.scale * otherController.scale;
+                    scale = Mathf.Pow(myVolume + otherVolume, 1f / 3f);
                 }
             }
         }
