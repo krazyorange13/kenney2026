@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
                     speed * Time.deltaTime
                 );
 
-                
+
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(
                     transform.rotation,
@@ -104,6 +104,7 @@ public class Player : MonoBehaviour
     {
         foreach (GameObject obj in currentObstructions)
         {
+            if (obj == null) continue;
             SetAlpha(obj, 1.0f);
             // Debug.Log($"Obstruction defaded: {obj.name}");
         }
@@ -169,8 +170,11 @@ public class Player : MonoBehaviour
             {
                 audioSource.PlayOneShot(growthAudio);
                 Destroy(bot);
+                Edible myEdible = GetComponent<Edible>();
                 Edible otherEdible = bot.GetComponent<Edible>();
-                GetComponent<Edible>().scale = GetComponent<Edible>().scale + otherEdible.scale;
+                float prevScale = myEdible.scale;
+                myEdible.scale += otherEdible.scale / 2;
+                Debug.Log($"Eating before: {prevScale} after: {myEdible.scale}");
             }
         }
     }
@@ -185,7 +189,7 @@ public class Player : MonoBehaviour
           new(-half.x, 0,  half.z),
           new( half.x, 0, -half.z),
           new( half.x, 0,  half.z),
-      };
+        };
 
         Vector3 myHalf = mine.size * 0.5f;
         Vector3 myMin = mine.center - myHalf;

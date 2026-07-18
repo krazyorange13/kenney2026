@@ -34,7 +34,6 @@ public class BotController : MonoBehaviour
         float currentScale = GetComponent<Edible>().scale;
         transform.localScale = Vector3.one * currentScale;
 
-
         target = null;
         threat = null;
         closestTargetDist = Mathf.Infinity;
@@ -51,16 +50,17 @@ public class BotController : MonoBehaviour
             // eating
             if (boxCollider.bounds.Intersects(other.bounds))
             {
-                
+
                 // check that the two opposite corners are contained within this bot's collider
-                if (ContainsBot2D(this.boxCollider, other)) {
+                if (ContainsBot2D(this.boxCollider, other))
+                {
                     audioSource.PlayOneShot(eatClip);
                     Destroy(edible);
-                    GetComponent<Edible>().scale = currentScale + otherScale;
+                    GetComponent<Edible>().scale += otherScale / 2;
                     continue;
                 }
             }
-            
+
             // AI
             BotController otherController = edible.GetComponent<BotController>();
             Player otherControllerIfPlayer = edible.GetComponent<Player>();
@@ -127,9 +127,9 @@ public class BotController : MonoBehaviour
         // can't pass borders
         if (spawner != null)
         {
-            if (nextPosition.x < spawner.minX 
-            || nextPosition.x > spawner.maxX 
-            || nextPosition.z < spawner.minZ 
+            if (nextPosition.x < spawner.minX
+            || nextPosition.x > spawner.maxX
+            || nextPosition.z < spawner.minZ
             || nextPosition.z > spawner.maxZ)
             {
                 Vector3 center = new Vector3((spawner.minX + spawner.maxX) / 2f, transform.position.y, (spawner.minZ + spawner.maxZ) / 2f);
@@ -137,11 +137,11 @@ public class BotController : MonoBehaviour
             }
         }
 
-        
+
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
 
         transform.position = nextPosition;
-    
+
     }
 
     public BotController setSpawner(BotSpawner spawner)

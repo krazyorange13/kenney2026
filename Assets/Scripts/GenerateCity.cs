@@ -53,6 +53,7 @@ public class GenerateCity : MonoBehaviour
                 Vector3 position = new Vector3(x, 0, y);
                 Quaternion rotation = Quaternion.identity;
                 Vector3 scale = new Vector3(tileWidth, tileHeight, tileWidth);
+                string _tag = "Untagged";
 
                 int _i = i - 1;
                 int _j = j - 1;
@@ -90,11 +91,16 @@ public class GenerateCity : MonoBehaviour
                         float randomRotation = UnityEngine.Random.Range(0, 4) * 90.0f;
                         position.y += 0.25f;
                         rotation = Quaternion.Euler(new Vector3(0.0f, randomRotation, 0.0f));
+                        _tag = "Edible";
                     }
                 }
 
                 GameObject newTile = Instantiate(prefab, position, rotation, transform);
                 newTile.transform.localScale = scale;
+                newTile.tag = _tag;
+
+                if (newTile.tag == "Edible")
+                    AddEdible(newTile);
 
                 tiles[i, j] = newTile;
             }
@@ -130,10 +136,11 @@ public class GenerateCity : MonoBehaviour
         {
             int carI = UnityEngine.Random.Range(0, carPrefabs.Count);
             GameObject carPrefab = carPrefabs[carI];
-            position += new Vector3(UnityEngine.Random.Range(-tileWidth / 2.0f, tileWidth / 2.0f), 0.0f, UnityEngine.Random.Range(-tileHeight / 2.0f, tileHeight / 2.0f));
+            position += new Vector3(UnityEngine.Random.Range(0.0f, tileWidth / 1.0f), 0.0f, UnityEngine.Random.Range(0.0f, tileHeight / 1.0f));
             Quaternion rotation = Quaternion.Euler(0.0f, UnityEngine.Random.Range(0, 360), 0.0f);
             GameObject car = Instantiate(carPrefab, position, rotation, transform);
             car.transform.localScale = Vector3.one * (carScale + UnityEngine.Random.Range(-carScaleDeviation, carScaleDeviation));
+            AddEdible(car);
         }
     }
 
@@ -146,9 +153,20 @@ public class GenerateCity : MonoBehaviour
             GameObject miscPrefab = miscPrefabs[miscI];
             position += new Vector3(UnityEngine.Random.Range(-tileWidth / 2.0f, tileWidth / 2.0f), 0.0f, UnityEngine.Random.Range(-tileHeight / 2.0f, tileHeight / 2.0f));
             Quaternion rotation = Quaternion.Euler(0.0f, UnityEngine.Random.Range(0, 360), 0.0f);
-            GameObject car = Instantiate(miscPrefab, position, rotation, transform);
-            car.transform.localScale = Vector3.one * (miscScale + UnityEngine.Random.Range(-miscScaleDeviation, miscScaleDeviation));
+            GameObject misc = Instantiate(miscPrefab, position, rotation, transform);
+            misc.transform.localScale = Vector3.one * (miscScale + UnityEngine.Random.Range(-miscScaleDeviation, miscScaleDeviation));
+            AddEdible(misc);
         }
+    }
+
+    void AddEdible(GameObject obj)
+    {
+        obj.tag = "Edible";
+        BoxCollider box = obj.GetComponent<BoxCollider>();
+        if (box == null) return;
+        float scale = Mathf.Pow(box.size.x * box.size.y * box.size.z, 1.0f / 3.0f) * 10.0f;
+        Edible edible = obj.AddComponent<Edible>();
+        edible.scale = Mathf.Ceil(scale);
     }
 
     void ReplaceRoad(int i, int j)

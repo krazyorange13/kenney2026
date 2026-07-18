@@ -65,6 +65,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ea36dece9919f91febc7b813f9bdb98b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4862892991766877843}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ea36dece9919f91febc7b813f9bdb98b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8418554823427577909}
   m_SourcePrefab: {fileID: 100100000, guid: ea36dece9919f91febc7b813f9bdb98b, type: 3}
 --- !u!1 &1070863710440851447 stripped
 GameObject:
@@ -116,3 +119,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e6ca255f8dc1d9cfa231e0fde6078c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FitBoxCollider
+--- !u!114 &-8418554823427577909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070863710440851447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 917ae06f9720be048a5bb0ccf4cfb90b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Edible
+  scale: 1
