@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class Player : MonoBehaviour
     public AudioClip growthAudio;
 
     public TextMeshProUGUI scoreText;
+
+    public Slider staminaSlider;
 
     void Start()
     {
@@ -93,6 +96,8 @@ public class Player : MonoBehaviour
                 staminaCount = staminaTotal;
             }
         }
+
+        staminaSlider.value = staminaCount / staminaTotal;
     }
 
     void Transparent()
