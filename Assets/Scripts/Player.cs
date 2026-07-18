@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Player : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip growthAudio;
 
+    public TextMeshProUGUI scoreText;
+
     void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
@@ -23,7 +26,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        transform.localScale = Vector3.one * GetComponent<Edible>().scale;
+        float scale = GetComponent<Edible>().scale;
+        transform.localScale = Vector3.one * scale;
+        scoreText.text = ((int)scale).ToString();
 
         Movement();
         Transparent();
