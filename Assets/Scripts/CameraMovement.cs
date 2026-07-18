@@ -3,8 +3,8 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
   public GameObject player;
-  public Vector3 offset;
-  public float smoothSpeed = 0.05f;
+  public Vector3 offset = new Vector3(-6f, 14f, -3f);
+  public float smoothSpeed = 0.02f;
 
   private Vector3 velocity = Vector3.zero;
 
