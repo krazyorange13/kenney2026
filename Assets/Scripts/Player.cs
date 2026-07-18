@@ -8,6 +8,10 @@ public class Player : MonoBehaviour
     public Camera camera;
     public LayerMask groundLayer;
     public float movementSpeed = 5.0f;
+    public float sprintSpeed = 10.0f;
+
+    private float staminaCount;
+    private float staminaTotal = 5f;
 
     private List<GameObject> currentObstructions = new List<GameObject>();
     private float fadeAlpha = 0.3f;
@@ -22,6 +26,7 @@ public class Player : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider>();
         audioSource = GetComponent<AudioSource>();
+        staminaCount = staminaTotal;
     }
 
     void Update()
@@ -49,22 +54,43 @@ public class Player : MonoBehaviour
 
             target.y = transform.position.y;
 
-            if (target.magnitude > 0.01f)
+            Vector3 direction = target - transform.position;
+
+            if (direction.magnitude > 0.01f)
             {
+                float speed;
+                if (Mouse.current.leftButton.isPressed && staminaCount > 0f)
+                {
+                    speed = sprintSpeed;
+                    staminaCount -= Time.deltaTime;
+                }
+                else
+                {
+                    speed = movementSpeed;
+                }
 
                 transform.position = Vector3.MoveTowards(
                     transform.position,
                     target,
-                    movementSpeed * Time.deltaTime
+                    speed * Time.deltaTime
                 );
 
-                Vector3 direction = target - transform.position;
+                
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(
                     transform.rotation,
                     targetRotation,
                     10f * Time.deltaTime
                 );
+            }
+        }
+
+        if (!Mouse.current.leftButton.isPressed)
+        {
+            staminaCount += Time.deltaTime * 0.5f;
+            if (staminaCount > staminaTotal)
+            {
+                staminaCount = staminaTotal;
             }
         }
     }

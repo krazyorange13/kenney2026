@@ -365,8 +365,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 184644755}
     - target: {fileID: 4476504124815070452, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
-      propertyPath: movementSpeed
+      propertyPath: sprintSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4476504124815070452, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      propertyPath: movementSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5319278286139801924, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: m_Layer
