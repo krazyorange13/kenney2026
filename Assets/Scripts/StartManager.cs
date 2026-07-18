@@ -6,6 +6,11 @@ public class StartManager : MonoBehaviour
 {
     public Slider volumeSlider;
 
+    void Start()
+    {
+        volumeSlider.value = PlayerPreferences.volume;
+    }
+
     public void StartGame() {
         int index = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(index + 1);
