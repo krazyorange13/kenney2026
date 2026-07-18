@@ -13,9 +13,13 @@ public class Player : MonoBehaviour
     public float scale = 2;
     private BoxCollider boxCollider;
 
+    private AudioSource audioSource;
+    public AudioClip growthAudio;
+
     void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -117,6 +121,7 @@ public class Player : MonoBehaviour
                 // check that the two opposite corners are contained within this bot's collider
                 if (ContainsBot2D(this.boxCollider, other))
                 {
+                    audioSource.PlayOneShot(growthAudio);
                     Destroy(bot);
                     float myVolume = scale * scale * scale;
                     BotController otherController = bot.GetComponent<BotController>();

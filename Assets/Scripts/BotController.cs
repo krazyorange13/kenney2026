@@ -12,11 +12,14 @@ public class BotController : MonoBehaviour
     private Quaternion targetRotation;
     private BoxCollider boxCollider;
 
+    private AudioSource audioSource;
+    public AudioClip eatClip;
 
     void Start()
     {
         targetRotation = transform.rotation;
         this.boxCollider = this.GetComponent<BoxCollider>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -67,6 +70,7 @@ public class BotController : MonoBehaviour
                 
                 // check that the two opposite corners are contained within this bot's collider
                 if (ContainsBot2D(this.boxCollider, other)) {
+                    audioSource.PlayOneShot(eatClip);
                     Destroy(bot);
                     float myVolume = scale * scale * scale;
                     BotController otherController = bot.GetComponent<BotController>();

@@ -73,6 +73,7 @@ MonoBehaviour:
     m_Bits: 8
   movementSpeed: 6
   scale: 2
+  growthAudio: {fileID: 8300000, guid: 25c0b4fa00e90d5758c99c21a31cf51a, type: 3}
 --- !u!1001 &3202907405625010992
 PrefabInstance:
   m_ObjectHideFlags: 0

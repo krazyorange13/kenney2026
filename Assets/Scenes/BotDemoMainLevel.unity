@@ -224,6 +224,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2049215335}
     - target: {fileID: 4476504124815070452, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      propertyPath: growthAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 25c0b4fa00e90d5758c99c21a31cf51a, type: 3}
+    - target: {fileID: 4476504124815070452, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: movementSpeed
       value: 10
       objectReference: {fileID: 0}
