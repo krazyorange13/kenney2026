@@ -18,6 +18,6 @@ public class StartManager : MonoBehaviour
 
     public void SetVolume(float sliderValue) {
         AudioListener.volume = Mathf.Pow(sliderValue, 2f);
-        // PlayerPreferences.volume = sliderValue;
+        PlayerPreferences.volume = sliderValue;
     }
 }
