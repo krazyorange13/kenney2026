@@ -7,13 +7,20 @@ public class BotController : MonoBehaviour
     private BotSpawner spawner;
     private float speed = 6;
     private float turnSpeed = 90f;
-    public float scale = 1;
     private float timeToDirChange = 0;
     private Quaternion targetRotation;
     private BoxCollider boxCollider;
 
     private AudioSource audioSource;
     public AudioClip eatClip;
+
+    GameObject target = null;
+    GameObject threat = null;
+
+    float closestTargetDist = Mathf.Infinity;
+    float closestThreatDist = Mathf.Infinity;
+
+    const float dangerRadius = 15f;
 
     void Start()
     {
@@ -24,25 +31,100 @@ public class BotController : MonoBehaviour
 
     void Update()
     {
-        transform.localScale = Vector3.one * scale;
+        float currentScale = GetComponent<Edible>().scale;
+        transform.localScale = Vector3.one * currentScale;
 
-        timeToDirChange -= Time.deltaTime;
 
-        if (timeToDirChange <= 0)
+        target = null;
+        threat = null;
+        closestTargetDist = Mathf.Infinity;
+        closestThreatDist = Mathf.Infinity;
+
+        foreach (GameObject edible in GameObject.FindGameObjectsWithTag("Edible"))
         {
-            Vector2 random = Random.insideUnitCircle.normalized;
+            if (edible == gameObject)
+                continue;
 
-            Vector3 direction = new Vector3(random.x, 0f, random.y);
-            targetRotation = Quaternion.LookRotation(direction);
+            BoxCollider other = edible.GetComponent<BoxCollider>();
+            float otherScale = edible.GetComponent<Edible>().scale;
 
-            timeToDirChange = Random.Range(2f, 5f);
+            // eating
+            if (boxCollider.bounds.Intersects(other.bounds))
+            {
+                
+                // check that the two opposite corners are contained within this bot's collider
+                if (ContainsBot2D(this.boxCollider, other)) {
+                    audioSource.PlayOneShot(eatClip);
+                    Destroy(edible);
+                    GetComponent<Edible>().scale = currentScale + otherScale;
+                    continue;
+                }
+            }
+            
+            // AI
+            BotController otherController = edible.GetComponent<BotController>();
+            Player otherControllerIfPlayer = edible.GetComponent<Player>();
+            if (otherController == null && otherControllerIfPlayer == null) continue;
+
+            float dist = Vector3.Distance(transform.position, edible.transform.position);
+
+
+            // AI: find closest threat
+            if (otherScale > currentScale && dist < dangerRadius)
+            {
+                if (dist < closestThreatDist)
+                {
+                    closestThreatDist = dist;
+                    threat = edible;
+                }
+            }
+
+            // AI: find closest target
+            else if (otherScale < currentScale)
+            {
+                if (dist < closestTargetDist)
+                {
+                    closestTargetDist = dist;
+                    target = edible;
+                }
+            }
         }
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+        if (threat != null && closestThreatDist <= closestTargetDist)
+        {
+            // run away
+            Vector3 dir = (transform.position - threat.transform.position).normalized;
+            dir = Quaternion.Euler(0, Random.Range(-20f, 20f), 0) * dir;
+            targetRotation = Quaternion.LookRotation(dir);
+        }
+        else if (target != null)
+        {
+            Vector3 dir = (target.transform.position - transform.position).normalized;
+            targetRotation = Quaternion.LookRotation(dir);
+        }
+        else
+        {
+            // wander normally
+            timeToDirChange -= Time.deltaTime;
 
+            if (timeToDirChange <= 0)
+            {
+                Vector2 random = Random.insideUnitCircle.normalized;
+
+                Vector3 direction = new Vector3(random.x, 0f, random.y);
+                targetRotation = Quaternion.LookRotation(direction);
+
+                timeToDirChange = Random.Range(2f, 5f);
+            }
+
+        }
+
+
+        // update position based on rotation
         Vector3 movement = transform.forward * speed * Time.deltaTime;
         Vector3 nextPosition = transform.position + movement;
 
+        // can't pass borders
         if (spawner != null)
         {
             if (nextPosition.x < spawner.minX 
@@ -55,28 +137,10 @@ public class BotController : MonoBehaviour
             }
         }
 
+        
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+
         transform.position = nextPosition;
-
-
-        foreach (GameObject bot in GameObject.FindGameObjectsWithTag("Edible"))
-        {
-            if (bot == gameObject)
-                continue;
-
-            BoxCollider other = bot.GetComponent<BoxCollider>();
-
-            if (boxCollider.bounds.Intersects(other.bounds))
-            {
-                
-                // check that the two opposite corners are contained within this bot's collider
-                if (ContainsBot2D(this.boxCollider, other)) {
-                    audioSource.PlayOneShot(eatClip);
-                    Destroy(bot);
-                    BotController otherController = bot.GetComponent<BotController>();
-                    scale = scale + otherController.scale;
-                }
-            }
-        }
     
     }
 

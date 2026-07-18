@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5604647449313035437}
   - component: {fileID: 6809810621288528465}
   - component: {fileID: -3775400199036906898}
+  - component: {fileID: -7360499628976098056}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Edible
@@ -166,3 +167,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-7360499628976098056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6081166618977227607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 917ae06f9720be048a5bb0ccf4cfb90b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'

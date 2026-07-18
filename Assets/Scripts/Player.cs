@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
 
     private List<GameObject> currentObstructions = new List<GameObject>();
     private float fadeAlpha = 0.3f;
-    public float scale = 2;
     private BoxCollider boxCollider;
 
     private AudioSource audioSource;
@@ -24,7 +23,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        transform.localScale = Vector3.one * scale;
+        transform.localScale = Vector3.one * GetComponent<Edible>().scale;
 
         Movement();
         Transparent();
@@ -120,8 +119,8 @@ public class Player : MonoBehaviour
             {
                 audioSource.PlayOneShot(growthAudio);
                 Destroy(bot);
-                BotController otherController = bot.GetComponent<BotController>();
-                scale = scale + otherController.scale;
+                Edible otherEdible = bot.GetComponent<Edible>();
+                GetComponent<Edible>().scale = GetComponent<Edible>().scale + otherEdible.scale;
             }
         }
     }
