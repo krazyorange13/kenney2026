@@ -24,7 +24,7 @@ public class BotSpawner : MonoBehaviour
             Vector3 spawnPosition = new Vector3(x, 0, z);
 
             GameObject newBot = Instantiate(botPrefab, spawnPosition, Quaternion.identity);
-            float scale = Random.Range(.5f, 7f);
+            float scale = Random.Range(1, 3);
             newBot.GetComponent<BotController>().setSpawner(this).scale = scale;
             SpawnBotModel(newBot);
         }

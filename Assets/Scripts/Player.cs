@@ -115,19 +115,13 @@ public class Player : MonoBehaviour
 
             BoxCollider other = bot.GetComponent<BoxCollider>();
 
-            if (boxCollider.bounds.Intersects(other.bounds))
+            // check that the two opposite corners are contained within this bot's collider
+            if (ContainsBot2D(this.boxCollider, other))
             {
-
-                // check that the two opposite corners are contained within this bot's collider
-                if (ContainsBot2D(this.boxCollider, other))
-                {
-                    audioSource.PlayOneShot(growthAudio);
-                    Destroy(bot);
-                    float myVolume = scale * scale * scale;
-                    BotController otherController = bot.GetComponent<BotController>();
-                    float otherVolume = otherController.scale * otherController.scale * otherController.scale;
-                    scale = Mathf.Pow(myVolume + otherVolume, 1f / 3f);
-                }
+                audioSource.PlayOneShot(growthAudio);
+                Destroy(bot);
+                BotController otherController = bot.GetComponent<BotController>();
+                scale = scale + otherController.scale;
             }
         }
     }

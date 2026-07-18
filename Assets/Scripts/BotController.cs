@@ -72,10 +72,8 @@ public class BotController : MonoBehaviour
                 if (ContainsBot2D(this.boxCollider, other)) {
                     audioSource.PlayOneShot(eatClip);
                     Destroy(bot);
-                    float myVolume = scale * scale * scale;
                     BotController otherController = bot.GetComponent<BotController>();
-                    float otherVolume = otherController.scale * otherController.scale * otherController.scale;
-                    scale = Mathf.Pow(myVolume + otherVolume, 1f / 3f);
+                    scale = scale + otherController.scale;
                 }
             }
         }
