@@ -44,41 +44,15 @@ public class BotController : MonoBehaviour
             if (edible == gameObject)
                 continue;
 
-            BoxCollider other = edible.GetComponent<BoxCollider>();
-            float otherScale = edible.GetComponent<Edible>().scale;
-
-            // eating
-            if (boxCollider.bounds.Intersects(other.bounds))
-            {
-
-                // check that the two opposite corners are contained within this bot's collider
-                if (ContainsBot2D(this.boxCollider, other))
-                {
-                    // if its a player, handle respawn
-                    RespawnManager player = edible.GetComponent<RespawnManager>();
-                    if (player != null)
-                    {
-                        edible.GetComponent<Player>().SendScore();
-                        player.ToggleMenu();
-                    }
-
-                    audioSource.PlayOneShot(eatClip);
-                    Destroy(edible);
-                    GetComponent<Edible>().scale += otherScale / 2;
-                    continue;
-                }
-            }
-
             // AI
-            BotController otherController = edible.GetComponent<BotController>();
-            Player otherControllerIfPlayer = edible.GetComponent<Player>();
-            if (otherController == null && otherControllerIfPlayer == null) continue;
+            // BotController otherController = edible.GetComponent<BotController>();
+            // Player otherControllerIfPlayer = edible.GetComponent<Player>();
+            // if (otherController == null && otherControllerIfPlayer == null) continue;
 
             float dist = Vector3.Distance(transform.position, edible.transform.position);
 
-
             // AI: find closest threat
-            if (otherScale > currentScale && dist < dangerRadius)
+            if (GetScale(edible) > GetScale(gameObject) && dist < dangerRadius)
             {
                 if (dist < closestThreatDist)
                 {
@@ -88,7 +62,7 @@ public class BotController : MonoBehaviour
             }
 
             // AI: find closest target
-            else if (otherScale < currentScale)
+            else if (GetScale(edible) < GetScale(gameObject))
             {
                 if (dist < closestTargetDist)
                 {
@@ -98,10 +72,12 @@ public class BotController : MonoBehaviour
             }
         }
 
+
         if (threat != null && closestThreatDist <= closestTargetDist)
         {
             // run away
             Vector3 dir = (transform.position - threat.transform.position).normalized;
+            dir.y = 0;
             dir = Quaternion.Euler(0, Random.Range(-20f, 20f), 0) * dir;
             targetRotation = Quaternion.LookRotation(dir);
         }
@@ -118,15 +94,12 @@ public class BotController : MonoBehaviour
             if (timeToDirChange <= 0)
             {
                 Vector2 random = Random.insideUnitCircle.normalized;
-
                 Vector3 direction = new Vector3(random.x, 0f, random.y);
                 targetRotation = Quaternion.LookRotation(direction);
-
                 timeToDirChange = Random.Range(2f, 5f);
             }
 
         }
-
 
         // update position based on rotation
         Vector3 movement = transform.forward * speed * Time.deltaTime;
@@ -145,11 +118,37 @@ public class BotController : MonoBehaviour
             }
         }
 
-
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
 
         transform.position = nextPosition;
 
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        GameObject other = collision.gameObject;
+        Edible otherEdible = other.GetComponent<Edible>();
+        if (otherEdible != null)
+        {
+            BoxCollider otherBox = other.GetComponent<BoxCollider>();
+
+            // check that the two opposite corners are contained within this bot's collider
+            if (ContainsBot2D(boxCollider, otherBox))
+            {
+                Destroy(other);
+                Edible myEdible = GetComponent<Edible>();
+                float prevScale = myEdible.scale;
+                myEdible.scale += otherEdible.scale / 2;
+                Debug.Log($"Eating before: {prevScale} after: {myEdible.scale}");
+            }
+        }
+    }
+
+
+    public static float GetScale(GameObject gameObject)
+    {
+        Vector3 scale = gameObject.transform.localScale;
+        return scale.x * scale.y * scale.z;
     }
 
     public BotController setSpawner(BotSpawner spawner)

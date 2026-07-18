@@ -157,12 +157,10 @@ public class Player : MonoBehaviour
 
     void OnCollisionStay(Collision collision)
     {
-        Debug.Log("I LOVE MEN!!!");
         GameObject other = collision.gameObject;
         Edible otherEdible = other.GetComponent<Edible>();
         if (otherEdible != null)
         {
-            Debug.Log("I LOVE MEN");
             BoxCollider otherBox = other.GetComponent<BoxCollider>();
 
             // check that the two opposite corners are contained within this bot's collider
