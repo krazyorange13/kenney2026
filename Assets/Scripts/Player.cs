@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Player : MonoBehaviour
     public LayerMask groundLayer;
     public float movementSpeed = 5.0f;
     public float sprintSpeed = 10.0f;
+    private float speedSizeMult = 1.01f;
 
     private float staminaCount;
     private float staminaTotal = 5f;
@@ -38,11 +40,11 @@ public class Player : MonoBehaviour
         transform.localScale = Vector3.one * scale;
         scoreText.text = ((int)scale).ToString();
 
-        Movement();
+        Movement(scale);
         Transparent();
     }
 
-    void Movement()
+    void Movement(float scale)
     {
         Vector2 mousePos = Mouse.current.position.ReadValue();
 
@@ -71,6 +73,8 @@ public class Player : MonoBehaviour
                     speed = movementSpeed;
                 }
 
+                speed *= (float) Math.Pow(speedSizeMult, scale);
+
                 transform.position = Vector3.MoveTowards(
                     transform.position,
                     target,
@@ -89,7 +93,7 @@ public class Player : MonoBehaviour
 
         if (!Mouse.current.leftButton.isPressed)
         {
-            staminaCount += Time.deltaTime * 0.5f;
+            staminaCount += Time.deltaTime * 0.7f;
             if (staminaCount > staminaTotal)
             {
                 staminaCount = staminaTotal;
