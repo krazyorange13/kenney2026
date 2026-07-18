@@ -213,5 +213,10 @@ public class Player : MonoBehaviour
 
         return true;
     }
+
+    public void SendScore()
+    {
+        Leaderboard.SubmitScore((int) gameObject.GetComponent<Edible>().scale);
+    }
 }
 

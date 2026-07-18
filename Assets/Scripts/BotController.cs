@@ -58,6 +58,7 @@ public class BotController : MonoBehaviour
                     RespawnManager player = edible.GetComponent<RespawnManager>();
                     if (player != null)
                     {
+                        edible.GetComponent<Player>().SendScore();
                         player.ToggleMenu();
                     }
 
