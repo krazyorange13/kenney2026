@@ -5,18 +5,15 @@ using TMPro;
 
 public class RespawnManager : MonoBehaviour
 {
+    private bool isOpen;
     public GameObject respawnMenu;
     public Slider volumeSlider;
 
     void Start()
     {
         respawnMenu.SetActive(false);
+        isOpen = false;
         volumeSlider.value = PlayerPreferences.volume;
-        // Time.timeScale = 1f;
-        // Player player = FindAnyObjectByType<Player>();
-        // if (player != null) {
-        //     player.enabled = true;
-        // }
     }
 
     public void QuitGame()
@@ -32,15 +29,27 @@ public class RespawnManager : MonoBehaviour
 
     public void ToggleMenu()
     {
-        Time.timeScale = 0f;
+        isOpen = !isOpen;
+        respawnMenu.SetActive(isOpen);
         Player player = FindAnyObjectByType<Player>();
         if (player != null) {
-            player.enabled = false;
+            Debug.Log("Stop Player");
+            player.enabled = !isOpen;
+        }
+
+        if (isOpen)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
         }
     }
 
     public void Respawn()
     {
+        ToggleMenu();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
