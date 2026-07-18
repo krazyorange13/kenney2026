@@ -54,6 +54,13 @@ public class BotController : MonoBehaviour
                 // check that the two opposite corners are contained within this bot's collider
                 if (ContainsBot2D(this.boxCollider, other))
                 {
+                    // if its a player, handle respawn
+                    RespawnManager player = edible.GetComponent<RespawnManager>();
+                    if (player != player)
+                    {
+                        player.ToggleMenu();
+                    }
+
                     audioSource.PlayOneShot(eatClip);
                     Destroy(edible);
                     GetComponent<Edible>().scale += otherScale / 2;
