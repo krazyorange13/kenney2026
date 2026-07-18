@@ -61,9 +61,32 @@ MonoBehaviour:
   roadIntersectionPrefab: {fileID: 919132149155446097, guid: 3fcf6816465083698ac5f47a894882af, type: 3}
   roadStraightPrefab: {fileID: 919132149155446097, guid: c140c47eef6aeceaf932a97e69f42cea, type: 3}
   roadStraightSinglePrefab: {fileID: 919132149155446097, guid: 387b66f14fed506b5854a7b8c0db6681, type: 3}
+  carPrefabs:
+  - {fileID: 7423621909416389811, guid: 86990a0dd25fc8731a68e45c33ceb1df, type: 3}
+  - {fileID: 7013146570264837317, guid: 94d40c187c679692696105f5c43f0b02, type: 3}
+  - {fileID: 7269152588049928808, guid: 45ce1e1e91013271f8e9d172d63c325f, type: 3}
+  - {fileID: 4335900900352130259, guid: 571be6d59ada78e64970ce8ab2b85913, type: 3}
+  - {fileID: 1056263517228738996, guid: c453a2d510c5ff267b28121b162bcbe1, type: 3}
+  - {fileID: 3349979002309888867, guid: 2218b71fedd685dd8bfd50935f630b39, type: 3}
+  - {fileID: 2974162919015396894, guid: a55699affd5a965e9a4a5fcf24cd912e, type: 3}
+  - {fileID: 1574465104834770656, guid: 5405d32f84b2e4b7a89f1dc2d368782b, type: 3}
+  - {fileID: 8941954621382550136, guid: 0091a85230f4c04749c23637d067dbc3, type: 3}
+  - {fileID: 6197780313123602668, guid: 30105a5c84dfde48780c54eed8be4d19, type: 3}
+  - {fileID: 5817458152336439932, guid: 39363d5f9845d7f63a73073ada205af4, type: 3}
+  - {fileID: 5178736823126659499, guid: f428b256f4f9aaefb88e13d0d471d704, type: 3}
+  - {fileID: 3880467997158959139, guid: 2ebdf1e0ba9929ecd815c2f4b3724b24, type: 3}
+  - {fileID: 256538069111350533, guid: 798e21e61c5ae56829f7322500214735, type: 3}
+  - {fileID: 1880136119123550585, guid: fcfa774078e21af00a6ec2e8b9ee4d12, type: 3}
+  - {fileID: 3138249076706202108, guid: 79b63011f03207e02a98739d0c23b024, type: 3}
+  - {fileID: 1070863710440851447, guid: 8349d91e15af25288890f9cbbd83c0b5, type: 3}
+  - {fileID: 4261231097030960711, guid: bbda6af5495b0185b937034b65245ff2, type: 3}
+  - {fileID: 765820722759829534, guid: c9d13b8c7f3c67af49796673c82338f6, type: 3}
+  - {fileID: 8053923156890625931, guid: 4ecef4356f24a398696a4792034f7217, type: 3}
   spread: 1
   sparsity: 0.1
   randomness: 0.25
+  carDensity: 0.5
+  carScale: 4
   cityWidth: 21
   cityHeight: 21
   tileWidth: 25

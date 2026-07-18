@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GenerateCity : MonoBehaviour
@@ -9,10 +10,19 @@ public class GenerateCity : MonoBehaviour
     public GameObject roadIntersectionPrefab;
     public GameObject roadStraightPrefab;
     public GameObject roadStraightSinglePrefab;
+    public List<GameObject> carPrefabs;
+    public List<GameObject> miscPrefabs;
 
     public float spread = 1.0f;
     public float sparsity = 0.1f;
     public float randomness = 0.25f;
+    public float carDensity = 0.5f;
+    public float carScale = 4.0f;
+    public float carScaleDeviation = 1.0f;
+    public int minMiscCount = 1;
+    public int maxMiscCount = 4;
+    public float miscScale = 25.0f;
+    public float miscScaleDeviation = 5.0f;
 
     public int cityWidth;
     public int cityHeight;
@@ -52,11 +62,15 @@ public class GenerateCity : MonoBehaviour
                     if (_j % 2 == 0)
                     {
                         prefab = roadIntersectionPrefab;
+                        PopulateCars(position);
+                        PopulateMisc(position);
                     }
                     else
                     {
                         prefab = roadStraightPrefab;
                         rotation = Quaternion.Euler(new Vector3(0.0f, 90.0f, 0.0f));
+                        PopulateCars(position);
+                        PopulateMisc(position);
                     }
                 }
                 else
@@ -64,6 +78,8 @@ public class GenerateCity : MonoBehaviour
                     if (_j % 2 == 0)
                     {
                         prefab = roadStraightPrefab;
+                        PopulateCars(position);
+                        PopulateMisc(position);
                     }
                     else
                     {
@@ -105,6 +121,33 @@ public class GenerateCity : MonoBehaviour
                     // ReplaceRoad(i, j + 1);
                 }
             }
+        }
+    }
+
+    void PopulateCars(Vector3 position)
+    {
+        if (UnityEngine.Random.value <= carDensity)
+        {
+            int carI = UnityEngine.Random.Range(0, carPrefabs.Count);
+            GameObject carPrefab = carPrefabs[carI];
+            position += new Vector3(UnityEngine.Random.Range(-tileWidth / 2.0f, tileWidth / 2.0f), 0.0f, UnityEngine.Random.Range(-tileHeight / 2.0f, tileHeight / 2.0f));
+            Quaternion rotation = Quaternion.Euler(0.0f, UnityEngine.Random.Range(0, 360), 0.0f);
+            GameObject car = Instantiate(carPrefab, position, rotation, transform);
+            car.transform.localScale = Vector3.one * (carScale + UnityEngine.Random.Range(-carScaleDeviation, carScaleDeviation));
+        }
+    }
+
+    void PopulateMisc(Vector3 position)
+    {
+        int n = UnityEngine.Random.Range(minMiscCount, maxMiscCount + 1);
+        for (int i = 0; i < n; i++)
+        {
+            int miscI = UnityEngine.Random.Range(0, miscPrefabs.Count);
+            GameObject miscPrefab = miscPrefabs[miscI];
+            position += new Vector3(UnityEngine.Random.Range(-tileWidth / 2.0f, tileWidth / 2.0f), 0.0f, UnityEngine.Random.Range(-tileHeight / 2.0f, tileHeight / 2.0f));
+            Quaternion rotation = Quaternion.Euler(0.0f, UnityEngine.Random.Range(0, 360), 0.0f);
+            GameObject car = Instantiate(miscPrefab, position, rotation, transform);
+            car.transform.localScale = Vector3.one * (miscScale + UnityEngine.Random.Range(-miscScaleDeviation, miscScaleDeviation));
         }
     }
 

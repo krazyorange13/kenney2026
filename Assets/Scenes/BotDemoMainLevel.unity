@@ -304,10 +304,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3834298587729601747, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4108157762522439653, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: m_Layer
       value: 2
@@ -383,7 +379,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3834298587729601747, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 976540888}
   m_SourcePrefab: {fileID: 100100000, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
 --- !u!1 &656271312
 GameObject:
@@ -520,6 +519,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+      propertyPath: carDensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+      propertyPath: miscPrefabs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+      propertyPath: 'miscPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8079094105721949062, guid: 278f7dde3e4c1a1fa8f8a78eee131903, type: 3}
+    - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+      propertyPath: 'miscPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 7076330074629938934, guid: e638b4e4342d8f3d4ac19a74fa67948e, type: 3}
+    - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+      propertyPath: 'miscPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 4906176337342874730, guid: 5e86760cf6738cd2eb6f0ea04bb60bea, type: 3}
+    - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+      propertyPath: 'miscPrefabs.Array.data[3]'
+      value: 
+      objectReference: {fileID: 6783509330452920408, guid: ab6ee74170aa0dc8f9ffd4bcef59b30a, type: 3}
+    - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+      propertyPath: 'miscPrefabs.Array.data[4]'
+      value: 
+      objectReference: {fileID: 6388353469503638805, guid: 65606a321045eb0489d56197365edb5e, type: 3}
+    - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+      propertyPath: 'miscPrefabs.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8947180965327008476, guid: a3425bb1a57429d4b91a356c94412c49, type: 3}
+    - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+      propertyPath: 'miscPrefabs.Array.data[6]'
+      value: 
+      objectReference: {fileID: 8148904016885012560, guid: 128ab79b3bb88e0f4924fdeeda9166f4, type: 3}
+    - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+      propertyPath: 'miscPrefabs.Array.data[7]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+      propertyPath: 'miscPrefabs.Array.data[8]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2786761060085049123, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
       propertyPath: m_Name
       value: City
@@ -585,7 +628,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &973995607
 MonoBehaviour:
   m_ObjectHideFlags: 0

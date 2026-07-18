@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
         foreach (GameObject obj in currentObstructions)
         {
             SetAlpha(obj, 1.0f);
-            Debug.Log($"Obstruction defaded: {obj.name}");
+            // Debug.Log($"Obstruction defaded: {obj.name}");
         }
 
         currentObstructions.Clear();
@@ -115,14 +115,10 @@ public class Player : MonoBehaviour
         {
             GameObject obj = hit.collider.gameObject;
 
-            Debug.Log($"Obstruction found: {obj.name}");
-
-            if (obj.GetComponent<Renderer>() != null)
-            {
-                currentObstructions.Add(obj);
-                SetAlpha(obj, fadeAlpha);
-                Debug.Log($"Obstruction faded: {obj.name}");
-            }
+            // Debug.Log($"Obstruction found: {obj.name}");
+            currentObstructions.Add(obj);
+            SetAlpha(obj, fadeAlpha);
+            // Debug.Log($"Obstruction faded: {obj.name}");
         }
     }
 
@@ -130,10 +126,28 @@ public class Player : MonoBehaviour
     {
         AutoTransparency autoTransparency = obj.GetComponent<AutoTransparency>();
         if (autoTransparency == null) return;
+        _SetAlpha(obj, alpha, autoTransparency);
+    }
+
+    void _SetAlpha(GameObject obj, float alpha, AutoTransparency autoTransparency)
+    {
         Color color = new Color(1.0f, 1.0f, 1.0f, alpha);
         autoTransparency.materialPropertyBlock.SetColor("_Base_Color", color);
-        obj.GetComponent<Renderer>().SetPropertyBlock(autoTransparency.materialPropertyBlock);
-
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.SetPropertyBlock(autoTransparency.materialPropertyBlock);
+        }
+        foreach (Transform child in obj.transform)
+        {
+            _SetAlpha(child.gameObject, alpha, autoTransparency);
+            // renderer = child.GetComponent<Renderer>();
+            // if (renderer != null)
+            // {
+            //     Debug.Log($"Obstruction child faded: {child.name}");
+            //     renderer.SetPropertyBlock(autoTransparency.materialPropertyBlock);
+            // }
+        }
     }
 
     void Eating()

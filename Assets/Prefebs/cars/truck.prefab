@@ -58,17 +58,32 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 279761a1d5fb5f2109c00cd8523d4316, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5099821506260808660}
+      addedObject: {fileID: 3689748809918065148}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 279761a1d5fb5f2109c00cd8523d4316, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3689748809918065148}
+      addedObject: {fileID: 1978853669649542600}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 279761a1d5fb5f2109c00cd8523d4316, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4614686077424421094}
   m_SourcePrefab: {fileID: 100100000, guid: 279761a1d5fb5f2109c00cd8523d4316, type: 3}
 --- !u!1 &4261231097030960711 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 279761a1d5fb5f2109c00cd8523d4316, type: 3}
   m_PrefabInstance: {fileID: 4027210697974602518}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &5099821506260808660
+--- !u!114 &3689748809918065148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4261231097030960711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286c8294b285622e387c0372a4c5fd04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoTransparency
+--- !u!65 &1978853669649542600
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,9 +102,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3689748809918065148
+  m_Size: {x: 1.5, y: 1.300003, z: 2.9500008}
+  m_Center: {x: 0, y: 0.6499996, z: -0.024999619}
+--- !u!114 &-4614686077424421094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,6 +113,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4261231097030960711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 286c8294b285622e387c0372a4c5fd04, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e6ca255f8dc1d9cfa231e0fde6078c1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AutoTransparency
+  m_EditorClassIdentifier: Assembly-CSharp::FitBoxCollider
