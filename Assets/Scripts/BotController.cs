@@ -65,7 +65,6 @@ public class BotController : MonoBehaviour
 
         if (threat != null && closestThreatDist <= closestTargetDist)
         {
-            Debug.Log("doing threat");
             // run away
             Vector3 dir = (transform.position - threat.transform.position).normalized;
             dir.y = 0;
@@ -74,7 +73,6 @@ public class BotController : MonoBehaviour
         }
         else if (target != null)
         {
-            Debug.Log("doing target");
             Vector3 dir = (target.transform.position - transform.position).normalized;
             targetRotation = Quaternion.LookRotation(dir);
         }
