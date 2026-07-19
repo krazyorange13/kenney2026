@@ -23,7 +23,7 @@ public class CameraMovement : MonoBehaviour
         if (player == null) return;
         float playerSize = player.GetComponent<Edible>().scale;
 
-        camera.orthographicSize = sizeBasis + ((float)Math.Sqrt(playerSize)) * sizeMultiplier;
+        camera.orthographicSize = sizeBasis + ((float)Math.Sqrt(playerSize * Math.Pow(playerSize, 0.2f))) * sizeMultiplier;
 
         Vector3 targetPosition = player.transform.position - transform.forward * cameraDistance;
 

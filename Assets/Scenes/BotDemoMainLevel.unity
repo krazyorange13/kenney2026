@@ -922,7 +922,7 @@ MonoBehaviour:
   minScale: 5
   maxScale: 8
   awarenessRadius: 8
-  maxHitsPerBot: 24
+  maxHitsPerBot: 32
 --- !u!4 &973995608
 Transform:
   m_ObjectHideFlags: 0
