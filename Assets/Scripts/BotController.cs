@@ -211,6 +211,7 @@ public class BotController : MonoBehaviour
 
         if (GetBoxScale(other.gameObject) >= GetBoxScale(gameObject))
         {
+            if (gameObject == other.gameObject) return;
             bool sentient = other.TryGetComponent<BotController>(out _) || other.TryGetComponent<Player>(out _);
             if (!sentient) return;
 
