@@ -43,6 +43,7 @@ public class PauseManager : MonoBehaviour
 
     public void QuitGame()
     {
+        SendScore();
         SceneManager.LoadScene(0);
         TogglePause();
     }
@@ -73,5 +74,12 @@ public class PauseManager : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
+    }
+
+    public void SendScore()
+    {
+        Player player = FindAnyObjectByType<Player>();
+        int score = (int)player.gameObject.GetComponent<Edible>().scale;
+        StartCoroutine(Leaderboard.SubmitScore(score));
     }
 }
