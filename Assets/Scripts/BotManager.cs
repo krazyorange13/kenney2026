@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Jobs;
@@ -24,6 +25,10 @@ public class BotManager : MonoBehaviour
     NativeArray<ColliderHit> results;
     int nQueries;
     int nResults;
+
+    // public float replaceInterval = 10.0f;
+    // private float replaceTimer = 0.0f;
+
     void Start()
     {
         minX = -cityGenerator.tileWidth / 2;
@@ -33,13 +38,13 @@ public class BotManager : MonoBehaviour
 
         for (int i = 0; i < botCount; i++)
         {
-            float x = Random.Range(minX, maxX);
-            float z = Random.Range(minZ, maxZ);
+            float x = UnityEngine.Random.Range(minX, maxX);
+            float z = UnityEngine.Random.Range(minZ, maxZ);
 
             Vector3 spawnPosition = new Vector3(x, 0, z);
 
             GameObject newBot = Instantiate(botPrefab, spawnPosition, Quaternion.identity, transform);
-            float scale = Random.Range(minScale, maxScale);
+            float scale = UnityEngine.Random.Range(minScale, maxScale);
             newBot.GetComponent<BotController>().setSpawner(this).GetComponent<Edible>().scale = scale;
             SpawnBotModel(newBot);
             bots.Add(newBot);
@@ -49,7 +54,7 @@ public class BotManager : MonoBehaviour
     public void SpawnBotModel(GameObject parent)
     {
         if (botPrefabs.Count == 0) return;
-        int rng = Random.Range(0, botPrefabs.Count);
+        int rng = UnityEngine.Random.Range(0, botPrefabs.Count);
         GameObject prefabToSpawn = botPrefabs[rng];
         GameObject go = Instantiate(prefabToSpawn, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), parent.transform);
         go.transform.localPosition = new Vector3(0, 0, 0);
@@ -78,7 +83,44 @@ public class BotManager : MonoBehaviour
         }
 
         jobHandle = OverlapSphereCommand.ScheduleBatch(commands, results, 64, maxHitsPerBot, default);
+
+        // replaceTimer -= Time.deltaTime;
+        // if (replaceTimer <= 0.0f)
+        // {
+        //     replaceTimer = replaceInterval;
+        //     ReplaceBot();
+        // }
     }
+
+    // void ReplaceBot()
+    // {
+    //     GameObject player = GameObject.Find("Player");
+    //     float playerScale = player.GetComponent<Edible>().scale;
+    //     GameObject furthestBot;
+    //     float maxDist = Mathf.Infinity;
+    //     foreach (GameObject bot in bots)
+    //     {
+    //         if (bot == null) continue;
+
+    //         float dist = Vector3.Distance(player.transform.position, bot.transform.position);
+    //         if (dist > maxDist)
+    //         {
+    //             if (bot.GetComponent<Edible>().scale < playerScale)
+    //                 furthestBot = bot;
+    //         }
+    //         furthestBot = bot;
+    //     }
+
+    //     Debug.Log("want to scale new thing");
+
+    //     if (furthestBot == null) return;
+    //     Debug.Log("first check");
+    //     Edible edible = furthestBot.GetComponent<Edible>();
+    //     if (edible == null) return;
+
+    //     Debug.Log("scaled new thing");
+    //     edible.scale = playerScale * UnityEngine.Random.Range(0.8f, 1.2f);
+    // }
 
     void LateUpdate()
     {
