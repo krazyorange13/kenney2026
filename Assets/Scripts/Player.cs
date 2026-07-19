@@ -228,9 +228,18 @@ public class Player : MonoBehaviour
         return true;
     }
 
+    public void Die()
+    {
+        SendScore();
+
+        RespawnManager respawnManager = FindAnyObjectByType<RespawnManager>();
+        respawnManager.ToggleMenu();
+    }
+
     public void SendScore()
     {
-        Leaderboard.SubmitScore((int)gameObject.GetComponent<Edible>().scale);
+        int score = (int)gameObject.GetComponent<Edible>().scale;
+        StartCoroutine(Leaderboard.SubmitScore(score));
     }
 }
 

@@ -161,11 +161,19 @@ public class BotController : MonoBehaviour
             // check that the two opposite corners are contained within this bot's collider
             if (ContainsBot2D(boxCollider, otherBox))
             {
-                Destroy(other);
-                Edible myEdible = GetComponent<Edible>();
-                float prevScale = myEdible.scale;
-                myEdible.scale += otherEdible.scale / 2;
-                // Debug.Log($"Eating before: {prevScale} after: {myEdible.scale}");
+
+                if (other.layer == 2)
+                {
+                    other.GetComponent<Player>().Die();
+                }
+                else
+                {
+                    Destroy(other);
+                    Edible myEdible = GetComponent<Edible>();
+                    float prevScale = myEdible.scale;
+                    myEdible.scale += otherEdible.scale / 2;
+                }
+                
             }
         }
     }

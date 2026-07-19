@@ -171,7 +171,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   movementSpeed: 6
+  sprintSpeed: 10
   growthAudio: {fileID: 8300000, guid: 25c0b4fa00e90d5758c99c21a31cf51a, type: 3}
+  scoreText: {fileID: 0}
+  staminaSlider: {fileID: 0}
 --- !u!114 &6408724288028685999
 MonoBehaviour:
   m_ObjectHideFlags: 0

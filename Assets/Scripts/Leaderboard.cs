@@ -33,7 +33,7 @@ public class Leaderboard : MonoBehaviour
     [SerializeField] private TMP_InputField usernameInput;
 
     private const string serverURL = "https://jeremyseq.dev";
-    private static readonly string SECRET_KEY = "";
+    private static readonly string SECRET_KEY = "62a09ef2af3a901418085c03c2977d9a";
 
     private void Start()
     {
