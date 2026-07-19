@@ -641,12 +641,16 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+      propertyPath: minMiscCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
       propertyPath: miscScaleDeviation
       value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
       propertyPath: miscPrefabs.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
       propertyPath: 'miscPrefabs.Array.data[0]'
@@ -671,15 +675,15 @@ PrefabInstance:
     - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
       propertyPath: 'miscPrefabs.Array.data[5]'
       value: 
-      objectReference: {fileID: 8620467331996126745, guid: 535e172cb4fd719f2af01ae89a063d74, type: 3}
+      objectReference: {fileID: 1889489790330963109, guid: f8f8ea2def0ec86ad9692f7c58f6deae, type: 3}
     - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
       propertyPath: 'miscPrefabs.Array.data[6]'
       value: 
-      objectReference: {fileID: 6783509330452920408, guid: ab6ee74170aa0dc8f9ffd4bcef59b30a, type: 3}
+      objectReference: {fileID: 8620467331996126745, guid: 535e172cb4fd719f2af01ae89a063d74, type: 3}
     - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
       propertyPath: 'miscPrefabs.Array.data[7]'
       value: 
-      objectReference: {fileID: 8947180965327008476, guid: a3425bb1a57429d4b91a356c94412c49, type: 3}
+      objectReference: {fileID: 6783509330452920408, guid: ab6ee74170aa0dc8f9ffd4bcef59b30a, type: 3}
     - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
       propertyPath: 'miscPrefabs.Array.data[8]'
       value: 

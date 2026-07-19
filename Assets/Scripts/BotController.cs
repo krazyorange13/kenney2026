@@ -54,6 +54,8 @@ public class BotController : MonoBehaviour
         float currentScale = GetComponent<Edible>().scale;
         transform.localScale = Vector3.one * ((float)Math.Sqrt(currentScale));
 
+        float speedBoost = 1.0f;
+
         if (threat != null && closestThreatDist <= closestTargetDist)
         {
             // run away
@@ -66,6 +68,7 @@ public class BotController : MonoBehaviour
         {
             Vector3 dir = (target.transform.position - transform.position).normalized;
             targetRotation = Quaternion.LookRotation(dir);
+            speedBoost = 1.25f;
         }
         else
         {
@@ -88,7 +91,7 @@ public class BotController : MonoBehaviour
             scaledSpeed = 100;
         }
         // Debug.Log(scaledSpeed);
-        Vector3 movement = transform.forward * scaledSpeed * Time.deltaTime;
+        Vector3 movement = transform.forward * scaledSpeed * speedBoost * Time.deltaTime;
         Vector3 nextPosition = transform.position + movement;
 
         // can't pass borders
@@ -227,9 +230,9 @@ public class BotController : MonoBehaviour
             else if (fullySentient)
             {
                 // incentivise eating other stuff over unfruitful chases
-                if (dist < closestTargetDist * 2.0f)
+                if (dist < closestTargetDist * 3.0f)
                 {
-                    closestTargetDist = dist * 2.0f;
+                    closestTargetDist = dist * 3.0f;
                     target = other.gameObject;
                 }
             }
