@@ -32,7 +32,9 @@ public class Leaderboard : MonoBehaviour
     public TextMeshProUGUI leaderboardText;
     [SerializeField] private TMP_InputField usernameInput;
 
-    private const string serverURL = "https://jeremyseq.dev";
+    public const string SERVER_URL = "https://jeremyseq.dev";
+    public const string LEADERBOARD_ROUTE = "/api/games/survival-of-the-fattest/top10";
+    public const string SUBMIT_SCORE_ROUTE = "/api/games/survival-of-the-fattest/submit";
     private static readonly string SECRET_KEY = "62a09ef2af3a901418085c03c2977d9a";
 
     private void Start()
@@ -54,7 +56,7 @@ public class Leaderboard : MonoBehaviour
 
     IEnumerator LoadLeaderboard()
     {
-        UnityWebRequest www = UnityWebRequest.Get(serverURL + "/api/games/survival-of-the-fattest/top10");
+        UnityWebRequest www = UnityWebRequest.Get(SERVER_URL + LEADERBOARD_ROUTE);
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
@@ -90,7 +92,7 @@ public class Leaderboard : MonoBehaviour
         };
 
         string json = JsonUtility.ToJson(submission);
-        UnityWebRequest www = UnityWebRequest.Put(serverURL + "/api/games/survival-of-the-fattest/submit", json);
+        UnityWebRequest www = UnityWebRequest.Put(SERVER_URL + SUBMIT_SCORE_ROUTE, json);
         www.method = UnityWebRequest.kHttpVerbPOST;
         www.SetRequestHeader("Content-Type", "application/json");
 

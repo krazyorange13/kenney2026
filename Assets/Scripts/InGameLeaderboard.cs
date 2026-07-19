@@ -8,7 +8,6 @@ public class InGameLeaderboard : MonoBehaviour
 {
     public TextMeshProUGUI leaderboardText;
 
-    private const string serverURL = "https://jeremyseq.dev";
 
     private List<Leaderboard.ScoreEntry> leaderboard = new();
     private int playerScore;
@@ -24,14 +23,13 @@ public class InGameLeaderboard : MonoBehaviour
         {
             yield return StartCoroutine(LoadLeaderboard());
 
-            // Refresh every 5 seconds
             yield return new WaitForSeconds(5f);
         }
     }
 
     IEnumerator LoadLeaderboard()
     {
-        UnityWebRequest www = UnityWebRequest.Get(serverURL + "/api/games/survival-of-the-fattest/top10");
+        UnityWebRequest www = UnityWebRequest.Get(Leaderboard.SERVER_URL + Leaderboard.LEADERBOARD_ROUTE);
 
         yield return www.SendWebRequest();
 
@@ -64,7 +62,6 @@ public class InGameLeaderboard : MonoBehaviour
             ? UserManager.Instance.Username
             : "Anonymous";
 
-        // Only add the live score if it isn't already present.
         bool alreadyPresent = display.Exists(x =>
             x.username == username &&
             x.score == playerScore);
@@ -109,7 +106,6 @@ public class InGameLeaderboard : MonoBehaviour
             }
         }
 
-        // If the player isn't in the top 10, show their rank underneath.
         if (playerRank > 10)
         {
             leaderboardText.text += "...\n";
