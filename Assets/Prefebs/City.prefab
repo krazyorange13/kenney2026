@@ -82,11 +82,23 @@ MonoBehaviour:
   - {fileID: 4261231097030960711, guid: bbda6af5495b0185b937034b65245ff2, type: 3}
   - {fileID: 765820722759829534, guid: c9d13b8c7f3c67af49796673c82338f6, type: 3}
   - {fileID: 8053923156890625931, guid: 4ecef4356f24a398696a4792034f7217, type: 3}
+  miscPrefabs:
+  - {fileID: 8079094105721949062, guid: 278f7dde3e4c1a1fa8f8a78eee131903, type: 3}
+  - {fileID: 7076330074629938934, guid: e638b4e4342d8f3d4ac19a74fa67948e, type: 3}
+  - {fileID: 4906176337342874730, guid: 5e86760cf6738cd2eb6f0ea04bb60bea, type: 3}
+  - {fileID: 6783509330452920408, guid: ab6ee74170aa0dc8f9ffd4bcef59b30a, type: 3}
+  - {fileID: 6388353469503638805, guid: 65606a321045eb0489d56197365edb5e, type: 3}
+  - {fileID: 8947180965327008476, guid: a3425bb1a57429d4b91a356c94412c49, type: 3}
   spread: 1
   sparsity: 0.1
   randomness: 0.25
   carDensity: 0.5
   carScale: 4
+  carScaleDeviation: 1
+  minMiscCount: 1
+  maxMiscCount: 4
+  miscScale: 25
+  miscScaleDeviation: 5
   cityWidth: 21
   cityHeight: 21
   tileWidth: 25
