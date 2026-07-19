@@ -2,28 +2,35 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-  public GameObject player;
-  private Vector3 offset = new Vector3(-75f, 150f, -35f);
-  public float cameraDistance = 10f;
-  public float sizeMultiplier = 2f;
-  public float smoothSpeed = 0.02f;
+    public GameObject player;
+    public float sizeBasis = 10f;
+    public float cameraDistance = 150f;
+    public float sizeMultiplier = 2f;
+    public float smoothSpeed = 0.02f;
 
-  private Vector3 velocity = Vector3.zero;
+    private Vector3 velocity = Vector3.zero;
 
-  void LateUpdate()
-  {
-    if (player == null) return;
-    float playerSize = player.GetComponent<Edible>().scale;
+    private Camera camera;
 
-    this.GetComponent<Camera>().orthographicSize = cameraDistance + playerSize * sizeMultiplier;
+    void Start()
+    {
+        camera = GetComponent<Camera>();
+    }
 
-    Vector3 targetPosition = player.transform.position + offset;
+    void LateUpdate()
+    {
+        if (player == null) return;
+        float playerSize = player.GetComponent<Edible>().scale;
 
-    transform.position = Vector3.SmoothDamp(
-        transform.position,
-        targetPosition,
-        ref velocity,
-        smoothSpeed
-    );
-  }
+        camera.orthographicSize = sizeBasis + playerSize * sizeMultiplier;
+
+        Vector3 targetPosition = player.transform.position - transform.forward * cameraDistance;
+
+        transform.position = Vector3.SmoothDamp(
+            transform.position,
+            targetPosition,
+            ref velocity,
+            smoothSpeed
+        );
+    }
 }

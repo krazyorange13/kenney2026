@@ -447,6 +447,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2049215335}
     - target: {fileID: 4476504124815070452, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4476504124815070452, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 184644755}
@@ -876,10 +880,6 @@ MonoBehaviour:
   botPrefab: {fileID: 6081166618977227607, guid: a7d31e1fcaa8c5b428a99b74dc256448, type: 3}
   botCount: 90
   cityGenerator: {fileID: 2089838219}
-  minX: 0
-  maxX: 525
-  minZ: 0
-  maxZ: 525
   minScale: 1
   maxScale: 5
   awarenessRadius: 5
@@ -1475,7 +1475,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
   player: {fileID: 976540884}
-  cameraDistance: 10
+  sizeBasis: 10
+  cameraDistance: 150
   sizeMultiplier: 2
   smoothSpeed: 0.02
 --- !u!114 &2049215333
