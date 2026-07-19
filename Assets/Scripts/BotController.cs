@@ -61,7 +61,7 @@ public class BotController : MonoBehaviour
     void Update()
     {
         float currentScale = GetComponent<Edible>().scale;
-        transform.localScale = Vector3.one * currentScale;
+        transform.localScale = Vector3.one * ((float) Math.Sqrt(currentScale));
 
         if (threat != null && closestThreatDist <= closestTargetDist)
         {
@@ -92,6 +92,10 @@ public class BotController : MonoBehaviour
 
         // update position based on rotation
         float scaledSpeed = speed * (float)System.Math.Pow(sizeSpeedMult, currentScale);
+        if (scaledSpeed >= 100)
+        {
+            scaledSpeed = 100;
+        }
         // Debug.Log(scaledSpeed);
         Vector3 movement = transform.forward * scaledSpeed * Time.deltaTime;
         Vector3 nextPosition = transform.position + movement;

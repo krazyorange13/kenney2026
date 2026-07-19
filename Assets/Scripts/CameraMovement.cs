@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class CameraMovement : MonoBehaviour
         if (player == null) return;
         float playerSize = player.GetComponent<Edible>().scale;
 
-        camera.orthographicSize = sizeBasis + playerSize * sizeMultiplier;
+        camera.orthographicSize = sizeBasis + ((float) Math.Sqrt(playerSize)) * sizeMultiplier;
 
         Vector3 targetPosition = player.transform.position - transform.forward * cameraDistance;
 

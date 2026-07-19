@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         float scale = GetComponent<Edible>().scale;
-        transform.localScale = Vector3.one * scale;
+        transform.localScale = Vector3.one * ((float) Math.Sqrt(scale));
         scoreText.text = ((int)scale).ToString();
 
         Movement(scale);
@@ -89,12 +89,16 @@ public class Player : MonoBehaviour
                     speed = movementSpeed;
                 }
 
-                speed *= (float)Math.Pow(speedSizeMult, scale);
+                float scaledSpeed = speed * (float) Math.Pow(speedSizeMult, scale);
+                if (scaledSpeed > 100)
+                {
+                    scaledSpeed = 100;
+                }
 
                 Vector3 newPosition = Vector3.MoveTowards(
                     transform.position,
                     target,
-                    speed * Time.deltaTime
+                    scaledSpeed * Time.deltaTime
                 );
 
                 // prevent going outside border
