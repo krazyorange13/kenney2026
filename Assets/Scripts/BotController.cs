@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Unity.Collections;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class BotController : MonoBehaviour
 {

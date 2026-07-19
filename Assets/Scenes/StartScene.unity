@@ -1545,9 +1545,9 @@ RectTransform:
   m_Father: {fileID: 862725845}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -407, y: 95}
-  m_SizeDelta: {x: -1759.6072, y: -1050}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 553, y: 95}
+  m_SizeDelta: {x: 160.39282, y: -1050}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1185163270
 MonoBehaviour:
@@ -1571,26 +1571,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Leaderboard
 
-    10 - Jeremy
-
-    9 - Teo
-
-    8 - A
-
-    7 - B
-
-    6
-    - C
-
-    5 - D
-
-    4 - E
-
-    3 - F
-
-    2 - G
-
-    1 - H'
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 19f9fbc95551f624a9326c27bb0f3572, type: 2}
   m_sharedMaterial: {fileID: -7786671789609511627, guid: 19f9fbc95551f624a9326c27bb0f3572, type: 2}
