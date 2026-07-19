@@ -5,7 +5,7 @@ using UnityEngine;
 public class BotController : MonoBehaviour
 {
     private BotManager spawner;
-    private float speed = 5f;
+    private float speed = 6.0f;
     private float sizeSpeedMult = 1.01f;
     private float turnSpeed = 90f;
     private float timeToDirChange = 0;
@@ -77,7 +77,7 @@ public class BotController : MonoBehaviour
                 Vector2 random = UnityEngine.Random.insideUnitCircle.normalized;
                 Vector3 direction = new Vector3(random.x, 0f, random.y);
                 targetRotation = Quaternion.LookRotation(direction);
-                timeToDirChange = UnityEngine.Random.Range(1f, 2f);
+                timeToDirChange = UnityEngine.Random.Range(3f, 5f);
             }
         }
 
@@ -202,12 +202,13 @@ public class BotController : MonoBehaviour
         if (!other.gameObject.CompareTag("Edible")) return;
 
         float dist = Vector3.Distance(transform.position, other.transform.position);
+        bool fullySentient = other.TryGetComponent<BotController>(out _);
+        bool partiallySentient = other.TryGetComponent<Player>(out _);
 
         if (GetBoxScale(other.gameObject) >= GetBoxScale(gameObject))
         {
             if (gameObject == other.gameObject) return;
-            bool sentient = other.TryGetComponent<BotController>(out _) || other.TryGetComponent<Player>(out _);
-            if (!sentient) return;
+            if (!(fullySentient || partiallySentient)) return;
 
             if (dist < closestThreatDist)
             {
@@ -217,10 +218,20 @@ public class BotController : MonoBehaviour
         }
         else
         {
-            if (other.gameObject.name == "Player")
+            if (partiallySentient)
             {
+                // yes eat the player please
                 closestTargetDist = 0.0f;
                 target = other.gameObject;
+            }
+            else if (fullySentient)
+            {
+                // incentivise eating other stuff over unfruitful chases
+                if (dist < closestTargetDist * 2.0f)
+                {
+                    closestTargetDist = dist * 2.0f;
+                    target = other.gameObject;
+                }
             }
             else if (dist < closestTargetDist)
             {
