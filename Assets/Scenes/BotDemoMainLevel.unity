@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &141568009 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+  m_PrefabInstance: {fileID: 701728845}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9978a7de930d753eb9c1f8a49444221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GenerateCity
 --- !u!1 &184644753
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,10 +458,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2049215335}
     - target: {fileID: 4476504124815070452, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4476504124815070452, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 184644755}
@@ -476,7 +483,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6408724288028685999, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: scale
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6789947242294973195, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: m_Layer
@@ -879,7 +886,7 @@ MonoBehaviour:
   - {fileID: 1863547128783442204, guid: e34248dc50daeaf4193d5d1129f4703f, type: 3}
   botPrefab: {fileID: 6081166618977227607, guid: a7d31e1fcaa8c5b428a99b74dc256448, type: 3}
   botCount: 90
-  cityGenerator: {fileID: 2089838219}
+  cityGenerator: {fileID: 141568009}
   minScale: 1
   maxScale: 5
   awarenessRadius: 5
@@ -988,8 +995,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ce5ab5e3f5b4fde628ea5361c839b056, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1063,8 +1070,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e22045dc9d807ca0dac9b7c7b021a3bc, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1476,7 +1483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
   player: {fileID: 976540884}
   sizeBasis: 10
-  cameraDistance: 150
+  cameraDistance: 10
   sizeMultiplier: 2
   smoothSpeed: 0.02
 --- !u!114 &2049215333
@@ -1708,17 +1715,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CursorManager
   cursorTexture: {fileID: 2800000, guid: 50075f9ed79547d47b4431a5512d5e91, type: 3}
   hotspot: {x: 0, y: 0}
---- !u!114 &2089838219 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
-  m_PrefabInstance: {fileID: 701728845}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9978a7de930d753eb9c1f8a49444221e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GenerateCity
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
