@@ -1,9 +1,8 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class BotController : MonoBehaviour
 {
-
     private BotSpawner spawner;
     private float speed = 6;
     private float turnSpeed = 90f;
@@ -14,19 +13,46 @@ public class BotController : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip eatClip;
 
-    GameObject target = null;
-    GameObject threat = null;
-
-    float closestTargetDist = Mathf.Infinity;
-    float closestThreatDist = Mathf.Infinity;
+    public GameObject target { get; set; }
+    public GameObject threat { get; set; }
+    public float closestTargetDist { get; set; }
+    public float closestThreatDist { get; set; }
+    private GameObject lateTarget { get; set; }
+    private GameObject lateThreat { get; set; }
 
     const float dangerRadius = 15f;
 
     void Start()
     {
         targetRotation = transform.rotation;
-        this.boxCollider = this.GetComponent<BoxCollider>();
+        boxCollider = GetComponent<BoxCollider>();
         audioSource = GetComponent<AudioSource>();
+    }
+
+    // OnDrawGizmosSelected
+    void OnDrawGizmos()
+    {
+        if (lateTarget)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position + Vector3.up * 0.1f, lateTarget.transform.position);
+        }
+
+        if (lateThreat)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position + Vector3.up * 0.1f, lateThreat.transform.position);
+        }
+    }
+
+    void LateUpdate()
+    {
+        lateTarget = target;
+        lateThreat = threat;
+        target = null;
+        threat = null;
+        closestTargetDist = Mathf.Infinity;
+        closestThreatDist = Mathf.Infinity;
     }
 
     void Update()
@@ -34,43 +60,39 @@ public class BotController : MonoBehaviour
         float currentScale = GetComponent<Edible>().scale;
         transform.localScale = Vector3.one * currentScale;
 
-        target = null;
-        threat = null;
-        closestTargetDist = Mathf.Infinity;
-        closestThreatDist = Mathf.Infinity;
+        // target = null;
+        // threat = null;
+        // closestTargetDist = Mathf.Infinity;
+        // closestThreatDist = Mathf.Infinity;
 
-        foreach (GameObject edible in GameObject.FindGameObjectsWithTag("Edible"))
-        {
-            if (edible == gameObject)
-                continue;
+        // foreach (GameObject edible in GameObject.FindGameObjectsWithTag("Edible"))
+        // {
+        //     if (edible == gameObject)
+        //         continue;
 
-            // AI
-            // BotController otherController = edible.GetComponent<BotController>();
-            // Player otherControllerIfPlayer = edible.GetComponent<Player>();
-            // if (otherController == null && otherControllerIfPlayer == null) continue;
+        //     // AI
+        //     float dist = Vector3.Distance(transform.position, edible.transform.position);
 
-            float dist = Vector3.Distance(transform.position, edible.transform.position);
+        //     // AI: find closest threat
+        //     if (GetScale(edible) > GetScale(gameObject) && dist < dangerRadius)
+        //     {
+        //         if (dist < closestThreatDist)
+        //         {
+        //             closestThreatDist = dist;
+        //             threat = edible;
+        //         }
+        //     }
 
-            // AI: find closest threat
-            if (GetScale(edible) > GetScale(gameObject) && dist < dangerRadius)
-            {
-                if (dist < closestThreatDist)
-                {
-                    closestThreatDist = dist;
-                    threat = edible;
-                }
-            }
-
-            // AI: find closest target
-            else if (GetScale(edible) < GetScale(gameObject))
-            {
-                if (dist < closestTargetDist)
-                {
-                    closestTargetDist = dist;
-                    target = edible;
-                }
-            }
-        }
+        //     // AI: find closest target
+        //     else if (GetScale(edible) < GetScale(gameObject))
+        //     {
+        //         if (dist < closestTargetDist)
+        //         {
+        //             closestTargetDist = dist;
+        //             target = edible;
+        //         }
+        //     }
+        // }
 
 
         if (threat != null && closestThreatDist <= closestTargetDist)
@@ -78,7 +100,7 @@ public class BotController : MonoBehaviour
             // run away
             Vector3 dir = (transform.position - threat.transform.position).normalized;
             dir.y = 0;
-            dir = Quaternion.Euler(0, Random.Range(-20f, 20f), 0) * dir;
+            dir = Quaternion.Euler(0, UnityEngine.Random.Range(-20f, 20f), 0) * dir;
             targetRotation = Quaternion.LookRotation(dir);
         }
         else if (target != null)
@@ -93,10 +115,10 @@ public class BotController : MonoBehaviour
 
             if (timeToDirChange <= 0)
             {
-                Vector2 random = Random.insideUnitCircle.normalized;
+                Vector2 random = UnityEngine.Random.insideUnitCircle.normalized;
                 Vector3 direction = new Vector3(random.x, 0f, random.y);
                 targetRotation = Quaternion.LookRotation(direction);
-                timeToDirChange = Random.Range(2f, 5f);
+                timeToDirChange = UnityEngine.Random.Range(2f, 5f);
             }
 
         }
@@ -121,7 +143,6 @@ public class BotController : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
 
         transform.position = nextPosition;
-
     }
 
     void OnCollisionStay(Collision collision)

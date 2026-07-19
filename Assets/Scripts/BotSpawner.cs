@@ -6,13 +6,16 @@ public class BotSpawner : MonoBehaviour
     public List<GameObject> botPrefabs = new List<GameObject>();
     public GameObject botPrefab;
 
-    public int botCount = 10;
+    public int botCount = 100;
 
     public float minX = -10f;
     public float maxX = 10f;
 
     public float minZ = -10f;
     public float maxZ = 10f;
+
+    public int minScale = 1;
+    public int maxScale = 5;
 
     void Start()
     {
@@ -24,7 +27,7 @@ public class BotSpawner : MonoBehaviour
             Vector3 spawnPosition = new Vector3(x, 0, z);
 
             GameObject newBot = Instantiate(botPrefab, spawnPosition, Quaternion.identity, transform);
-            float scale = Random.Range(1, 3);
+            float scale = Random.Range(minScale, maxScale);
             newBot.GetComponent<BotController>().setSpawner(this).GetComponent<Edible>().scale = scale;
             SpawnBotModel(newBot);
         }
