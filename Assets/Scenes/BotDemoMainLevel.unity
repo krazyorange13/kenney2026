@@ -411,7 +411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4269865798072476078, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 350
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4269865798072476078, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -419,7 +419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4269865798072476078, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 350
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4269865798072476078, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -638,7 +638,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
       propertyPath: cityWidth
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
       propertyPath: carDensity
@@ -646,7 +646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
       propertyPath: cityHeight
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
       propertyPath: maxMiscCount
@@ -917,10 +917,10 @@ MonoBehaviour:
   - {fileID: 4715698705747752978, guid: b82449ae52f34f547a3d726a9ce61db0, type: 3}
   - {fileID: 1863547128783442204, guid: e34248dc50daeaf4193d5d1129f4703f, type: 3}
   botPrefab: {fileID: 6081166618977227607, guid: a7d31e1fcaa8c5b428a99b74dc256448, type: 3}
-  botCount: 300
+  botCount: 200
   cityGenerator: {fileID: 141568009}
-  minScale: 5
-  maxScale: 8
+  minScale: 4
+  maxScale: 7
   awarenessRadius: 8
   maxHitsPerBot: 32
 --- !u!4 &973995608

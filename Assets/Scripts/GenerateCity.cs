@@ -194,7 +194,7 @@ public class GenerateCity : MonoBehaviour
             height += UnityEngine.Random.Range(-1, 2);
         }
         height = Mathf.Max(Mathf.Min(height, buildingPrefabs.Count - 1), 0);
-        return buildingPrefabs[height];
+        return buildingPrefabs[buildingPrefabs.Count - 1 - height];
     }
 
     float GetBuildingHeight(int i, int j, float mean = 0.0f, float stdev = 1.0f)

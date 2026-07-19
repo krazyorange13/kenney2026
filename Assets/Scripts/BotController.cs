@@ -226,15 +226,18 @@ public class BotController : MonoBehaviour
             if (partiallySentient)
             {
                 // yes eat the player please
-                closestTargetDist = 0.0f;
-                target = other.gameObject;
+                if (dist < closestTargetDist * 5.0f)
+                {
+                    closestTargetDist = 0.2f;
+                    target = other.gameObject;
+                }
             }
             else if (fullySentient)
             {
                 // incentivise eating other stuff over unfruitful chases
-                if (dist < closestTargetDist * 3.0f)
+                if (dist < closestTargetDist * 0.5f)
                 {
-                    closestTargetDist = dist * 3.0f;
+                    closestTargetDist = dist * 2.0f;
                     target = other.gameObject;
                 }
             }
