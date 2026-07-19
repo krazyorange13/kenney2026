@@ -826,7 +826,7 @@ GameObject:
   - component: {fileID: 973995608}
   - component: {fileID: 973995607}
   m_Layer: 0
-  m_Name: BotSpawner
+  m_Name: BotManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -877,6 +877,8 @@ MonoBehaviour:
   maxZ: 500
   minScale: 1
   maxScale: 5
+  awarenessRadius: 5
+  maxHitsPerBot: 16
 --- !u!4 &973995608
 Transform:
   m_ObjectHideFlags: 0
