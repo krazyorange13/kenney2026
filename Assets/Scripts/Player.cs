@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 
     public Slider staminaSlider;
     public BotManager botManager;
+    public InGameLeaderboard inGameLeaderboard;
 
     void Start()
     {
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
         float scale = GetComponent<Edible>().scale;
         transform.localScale = Vector3.one * ((float)Math.Sqrt(scale));
         scoreText.text = ((int)scale).ToString();
+        inGameLeaderboard.SetPlayerScore((int) scale);
 
         Movement(scale);
         Transparent();

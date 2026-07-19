@@ -42,7 +42,7 @@ public class Leaderboard : MonoBehaviour
             usernameInput.text = UserManager.Instance.Username;
         }
 
-        usernameInput.onEndEdit.AddListener(OnUsernameInputEndEdit);
+        if (usernameInput != null) usernameInput.onEndEdit.AddListener(OnUsernameInputEndEdit);
 
         StartCoroutine(LoadLeaderboard());
     }
