@@ -4,7 +4,8 @@ using UnityEngine;
 public class BotController : MonoBehaviour
 {
     private BotSpawner spawner;
-    private float speed = 6;
+    private float speed = 5f;
+    private float sizeSpeedMult = 1.01f;
     private float turnSpeed = 90f;
     private float timeToDirChange = 0;
     private Quaternion targetRotation;
@@ -124,7 +125,9 @@ public class BotController : MonoBehaviour
         }
 
         // update position based on rotation
-        Vector3 movement = transform.forward * speed * Time.deltaTime;
+        float scaledSpeed = speed * (float) System.Math.Pow(sizeSpeedMult, currentScale);
+        Debug.Log(scaledSpeed);
+        Vector3 movement = transform.forward * scaledSpeed * Time.deltaTime;
         Vector3 nextPosition = transform.position + movement;
 
         // can't pass borders
