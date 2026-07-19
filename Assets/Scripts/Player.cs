@@ -10,8 +10,8 @@ public class Player : MonoBehaviour
     public Camera camera;
     public LayerMask groundLayer;
     public float movementSpeed = 5.0f;
-    public float sprintSpeed = 10.0f;
-    private float speedSizeMult = 1.01f;
+    public float sprintBoost = 1.5f;
+    private float speedSizeMult = 0.2f;
 
     private float staminaCount;
     private float staminaTotal = 5f;
@@ -39,9 +39,9 @@ public class Player : MonoBehaviour
     void Update()
     {
         float scale = GetComponent<Edible>().scale;
-        transform.localScale = Vector3.one * ((float)Math.Sqrt(scale));
+        transform.localScale = Vector3.one * ((float)Math.Sqrt(scale * Math.Pow(scale, 0.2f)));
         scoreText.text = ((int)scale).ToString();
-        inGameLeaderboard.SetPlayerScore((int) scale);
+        inGameLeaderboard.SetPlayerScore((int)scale);
 
         Movement(scale);
         Transparent();
@@ -65,25 +65,23 @@ public class Player : MonoBehaviour
     void Movement(float scale)
     {
         Vector2 mousePos = Mouse.current.position.ReadValue();
-
         Ray ray = camera.ScreenPointToRay(mousePos);
-
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
 
         if (groundPlane.Raycast(ray, out float distance))
         {
             Vector3 target = ray.GetPoint(distance);
-
             target.y = transform.position.y;
-
             Vector3 direction = target - transform.position;
 
             if (direction.magnitude > 0.01f)
             {
                 float speed;
+                float speedFactor = 1.0f;
                 if (Mouse.current.leftButton.isPressed && staminaCount > 0f)
                 {
-                    speed = sprintSpeed;
+                    speed = movementSpeed;
+                    speedFactor = sprintBoost;
                     staminaCount -= Time.deltaTime;
                 }
                 else
@@ -91,7 +89,8 @@ public class Player : MonoBehaviour
                     speed = movementSpeed;
                 }
 
-                float scaledSpeed = speed * (float)Math.Pow(speedSizeMult, scale);
+                // float scaledSpeed = speed * (float)Math.Pow(speedSizeMult, scale);
+                float scaledSpeed = speed + speedSizeMult * scale;
                 if (scaledSpeed > 100)
                 {
                     scaledSpeed = 100;
@@ -100,7 +99,7 @@ public class Player : MonoBehaviour
                 Vector3 newPosition = Vector3.MoveTowards(
                     transform.position,
                     target,
-                    scaledSpeed * Time.deltaTime
+                    scaledSpeed * speedFactor * Time.deltaTime
                 );
 
                 // prevent going outside border
@@ -236,7 +235,7 @@ public class Player : MonoBehaviour
 
         float dist = Vector3.Distance(myPos2D, urPos2D);
         float radius = Vector2.Distance(new Vector2(mine.transform.localScale.x * mine.size.x, mine.transform.localScale.z * mine.size.z), Vector2.zero);
-        float threshold = radius * 0.5f;
+        float threshold = radius * 0.4f;
 
         Debug.DrawLine(mine.transform.position, mine.transform.position + Vector3.forward * threshold, Color.yellowNice, 0.02f, false);
 

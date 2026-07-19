@@ -5,8 +5,8 @@ using UnityEngine;
 public class BotController : MonoBehaviour
 {
     private BotManager spawner;
-    private float speed = 6.0f;
-    private float sizeSpeedMult = 1.01f;
+    private float speed = 5.0f;
+    private float sizeSpeedMult = 0.2f;
     private float turnSpeed = 90f;
     private float timeToDirChange = 0;
     private Quaternion targetRotation;
@@ -52,7 +52,7 @@ public class BotController : MonoBehaviour
     void Update()
     {
         float currentScale = GetComponent<Edible>().scale;
-        transform.localScale = Vector3.one * ((float)Math.Sqrt(currentScale));
+        transform.localScale = Vector3.one * ((float)Math.Sqrt(currentScale * Math.Pow(currentScale, 0.2f)));
 
         float speedBoost = 1.0f;
 
@@ -68,7 +68,7 @@ public class BotController : MonoBehaviour
         {
             Vector3 dir = (target.transform.position - transform.position).normalized;
             targetRotation = Quaternion.LookRotation(dir);
-            speedBoost = 1.25f;
+            speedBoost = 1.2f;
         }
         else
         {
@@ -85,7 +85,8 @@ public class BotController : MonoBehaviour
         }
 
         // update position based on rotation
-        float scaledSpeed = speed * (float)System.Math.Pow(sizeSpeedMult, currentScale);
+        // float scaledSpeed = speed * (float)Math.Pow(sizeSpeedMult, currentScale);
+        float scaledSpeed = speed + sizeSpeedMult * currentScale;
         if (scaledSpeed >= 100)
         {
             scaledSpeed = 100;
@@ -130,7 +131,6 @@ public class BotController : MonoBehaviour
             // check that the two opposite corners are contained within this bot's collider
             if (ContainsBot2D(boxCollider, otherBox))
             {
-
                 if (other.layer == 2)
                 {
                     other.GetComponent<Player>().Die();
@@ -142,7 +142,6 @@ public class BotController : MonoBehaviour
                     float prevScale = myEdible.scale;
                     myEdible.scale += otherEdible.scale / 2;
                 }
-
             }
         }
     }
@@ -183,7 +182,7 @@ public class BotController : MonoBehaviour
 
         float dist = Vector3.Distance(myPos2D, urPos2D);
         float radius = Vector2.Distance(new Vector2(mine.transform.localScale.x * mine.size.x, mine.transform.localScale.z * mine.size.z), Vector2.zero);
-        float threshold = radius * 0.5f;
+        float threshold = radius * 0.4f;
 
         if (dist >= threshold) return false;
 
