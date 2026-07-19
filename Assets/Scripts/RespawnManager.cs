@@ -22,7 +22,8 @@ public class RespawnManager : MonoBehaviour
         ToggleMenu();
     }
 
-    public void SetVolume(float sliderValue) {
+    public void SetVolume(float sliderValue)
+    {
         PlayerPreferences.volume = sliderValue;
         AudioListener.volume = Mathf.Pow(sliderValue, 2f);
     }
@@ -32,7 +33,8 @@ public class RespawnManager : MonoBehaviour
         isOpen = !isOpen;
         respawnMenu.SetActive(isOpen);
         Player player = FindAnyObjectByType<Player>();
-        if (player != null) {
+        if (player != null)
+        {
             Debug.Log("Stop Player");
             player.enabled = !isOpen;
         }

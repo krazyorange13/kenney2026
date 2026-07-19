@@ -29,10 +29,10 @@ public class BotManager : MonoBehaviour
     int nResults;
     void Start()
     {
-        minX = -cityGenerator.tileWidth/2;
-        minZ = -cityGenerator.tileHeight/2;
-        maxX = cityGenerator.tileWidth * cityGenerator.cityWidth - cityGenerator.tileWidth/2;
-        maxZ = cityGenerator.tileHeight * cityGenerator.cityHeight - cityGenerator.tileHeight/2;
+        minX = -cityGenerator.tileWidth / 2;
+        minZ = -cityGenerator.tileHeight / 2;
+        maxX = cityGenerator.tileWidth * cityGenerator.cityWidth - cityGenerator.tileWidth / 2;
+        maxZ = cityGenerator.tileHeight * cityGenerator.cityHeight - cityGenerator.tileHeight / 2;
 
         for (int i = 0; i < botCount; i++)
         {

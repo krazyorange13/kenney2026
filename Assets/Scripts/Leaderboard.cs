@@ -71,7 +71,7 @@ public class Leaderboard : MonoBehaviour
             leaderboardText.text = "Leaderboard\n";
             for (int i = 0; i < scores.Length; i++)
             {
-                leaderboardText.text += $"{i+1}. {scores[i].username}: {scores[i].score}\n";
+                leaderboardText.text += $"{i + 1}. {scores[i].username}: {scores[i].score}\n";
             }
         }
     }
@@ -79,7 +79,7 @@ public class Leaderboard : MonoBehaviour
     public static IEnumerator SubmitScore(int score)
     {
         string username = UserManager.Instance != null ? UserManager.Instance.Username : "Anonymous";
-        
+
         string signature = GenerateHMAC(username + score, SECRET_KEY);
 
         ScoreSubmission submission = new ScoreSubmission
@@ -118,7 +118,7 @@ public class Leaderboard : MonoBehaviour
             public T[] items;
         }
     }
-    
+
     private static string GenerateHMAC(string message, string hexKey)
     {
         byte[] keyBytes = HexStringToBytes(hexKey);
@@ -130,7 +130,7 @@ public class Leaderboard : MonoBehaviour
             return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
         }
     }
-    
+
     private static byte[] HexStringToBytes(string hex)
     {
         byte[] bytes = new byte[hex.Length / 2];

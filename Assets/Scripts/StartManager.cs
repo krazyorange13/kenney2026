@@ -11,7 +11,8 @@ public class StartManager : MonoBehaviour
         volumeSlider.value = PlayerPreferences.volume;
     }
 
-    public void StartGame() {
+    public void StartGame()
+    {
         int index = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(index + 1);
     }
@@ -21,7 +22,8 @@ public class StartManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void SetVolume(float sliderValue) {
+    public void SetVolume(float sliderValue)
+    {
         AudioListener.volume = Mathf.Pow(sliderValue, 2f);
         PlayerPreferences.volume = sliderValue;
     }

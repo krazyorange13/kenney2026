@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         float scale = GetComponent<Edible>().scale;
-        transform.localScale = Vector3.one * ((float) Math.Sqrt(scale));
+        transform.localScale = Vector3.one * ((float)Math.Sqrt(scale));
         scoreText.text = ((int)scale).ToString();
 
         Movement(scale);
@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
                     speed = movementSpeed;
                 }
 
-                float scaledSpeed = speed * (float) Math.Pow(speedSizeMult, scale);
+                float scaledSpeed = speed * (float)Math.Pow(speedSizeMult, scale);
                 if (scaledSpeed > 100)
                 {
                     scaledSpeed = 100;
@@ -186,12 +186,6 @@ public class Player : MonoBehaviour
         foreach (Transform child in obj.transform)
         {
             _SetAlpha(child.gameObject, alpha, autoTransparency);
-            // renderer = child.GetComponent<Renderer>();
-            // if (renderer != null)
-            // {
-            //     Debug.Log($"Obstruction child faded: {child.name}");
-            //     renderer.SetPropertyBlock(autoTransparency.materialPropertyBlock);
-            // }
         }
     }
 

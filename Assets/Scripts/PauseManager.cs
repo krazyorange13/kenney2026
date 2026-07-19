@@ -31,11 +31,13 @@ public class PauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (escapeAction.WasPressedThisFrame()) {
-        TogglePause();
+        if (escapeAction.WasPressedThisFrame())
+        {
+            TogglePause();
         }
-        if (tabAction.WasPressedThisFrame()) {
-        TogglePause();
+        if (tabAction.WasPressedThisFrame())
+        {
+            TogglePause();
         }
     }
 
@@ -45,17 +47,20 @@ public class PauseManager : MonoBehaviour
         TogglePause();
     }
 
-    public void SetVolume(float sliderValue) {
+    public void SetVolume(float sliderValue)
+    {
         PlayerPreferences.volume = sliderValue;
         AudioListener.volume = Mathf.Pow(sliderValue, 2f);
     }
 
-    public void TogglePause() {
+    public void TogglePause()
+    {
         isPaused = !isPaused;
         pauseMenu.SetActive(isPaused);
         audioSource.PlayOneShot(audioClip);
         Player player = FindAnyObjectByType<Player>();
-        if (player != null) {
+        if (player != null)
+        {
             Debug.Log("Stop Player");
             player.enabled = !isPaused;
         }

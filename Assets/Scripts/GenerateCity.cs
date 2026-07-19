@@ -154,7 +154,9 @@ public class GenerateCity : MonoBehaviour
             position += new Vector3(UnityEngine.Random.Range(-tileWidth / 2.0f, tileWidth / 2.0f), 0.0f, UnityEngine.Random.Range(-tileHeight / 2.0f, tileHeight / 2.0f));
             Quaternion rotation = Quaternion.Euler(0.0f, UnityEngine.Random.Range(0, 360), 0.0f);
             GameObject misc = Instantiate(miscPrefab, position, rotation, transform);
-            misc.transform.localScale = Vector3.one * (miscScale + UnityEngine.Random.Range(-miscScaleDeviation, miscScaleDeviation));
+            // misc.transform.localScale = Vector3.one * (miscScale + UnityEngine.Random.Range(-miscScaleDeviation, miscScaleDeviation));
+            misc.transform.localScale *= UnityEngine.Random.Range(1.0f / miscScaleDeviation, 1 * miscScaleDeviation);
+            // Debug.Log(misc.transform.localScale.x);
             AddEdible(misc);
         }
     }

@@ -8,7 +8,7 @@ public class ButtonSounds : MonoBehaviour
     public void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        
+
     }
 
     public void OnClick()

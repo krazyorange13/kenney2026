@@ -22,8 +22,6 @@ public class BotController : MonoBehaviour
     private GameObject lateTarget { get; set; }
     private GameObject lateThreat { get; set; }
 
-    const float dangerRadius = 15f;
-
     void Start()
     {
         targetRotation = transform.rotation;
@@ -51,14 +49,10 @@ public class BotController : MonoBehaviour
         }
     }
 
-    void LateUpdate()
-    {
-    }
-
     void Update()
     {
         float currentScale = GetComponent<Edible>().scale;
-        transform.localScale = Vector3.one * ((float) Math.Sqrt(currentScale));
+        transform.localScale = Vector3.one * ((float)Math.Sqrt(currentScale));
 
         if (threat != null && closestThreatDist <= closestTargetDist)
         {
@@ -223,7 +217,12 @@ public class BotController : MonoBehaviour
         }
         else
         {
-            if (dist < closestTargetDist)
+            if (other.gameObject.name == "Player")
+            {
+                closestTargetDist = 0.0f;
+                target = other.gameObject;
+            }
+            else if (dist < closestTargetDist)
             {
                 closestTargetDist = dist;
                 target = other.gameObject;
