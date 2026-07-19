@@ -468,7 +468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6408724288028685999, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: scale
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6789947242294973195, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: m_Layer
@@ -875,6 +875,8 @@ MonoBehaviour:
   maxX: 500
   minZ: 0
   maxZ: 500
+  minScale: 1
+  maxScale: 5
 --- !u!4 &973995608
 Transform:
   m_ObjectHideFlags: 0

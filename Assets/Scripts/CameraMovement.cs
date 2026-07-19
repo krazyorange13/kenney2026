@@ -12,6 +12,7 @@ public class CameraMovement : MonoBehaviour
 
   void LateUpdate()
   {
+    if (player == null) return;
     float playerSize = player.GetComponent<Edible>().scale;
 
     this.GetComponent<Camera>().orthographicSize = cameraDistance + playerSize * sizeMultiplier;

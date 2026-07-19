@@ -42,6 +42,21 @@ public class Player : MonoBehaviour
 
         Movement(scale);
         Transparent();
+        DebugThreshold();
+    }
+
+    void DebugThreshold()
+    {
+        BoxCollider mine = gameObject.GetComponent<BoxCollider>();
+
+        Vector2 random = UnityEngine.Random.insideUnitCircle.normalized;
+        Vector3 direction = new Vector3(random.x, 0f, random.y);
+
+        float radius = Vector2.Distance(new Vector2(mine.transform.localScale.x * mine.size.x, mine.transform.localScale.z * mine.size.z), Vector2.zero);
+        float threshold = radius * 0.5f;
+
+        Debug.DrawLine(mine.transform.position, mine.transform.position + direction * threshold, Color.yellowNice, 0.2f, false);
+
     }
 
     void Movement(float scale)
@@ -73,7 +88,7 @@ public class Player : MonoBehaviour
                     speed = movementSpeed;
                 }
 
-                speed *= (float) Math.Pow(speedSizeMult, scale);
+                speed *= (float)Math.Pow(speedSizeMult, scale);
 
                 transform.position = Vector3.MoveTowards(
                     transform.position,
@@ -175,42 +190,40 @@ public class Player : MonoBehaviour
                 Edible myEdible = GetComponent<Edible>();
                 float prevScale = myEdible.scale;
                 myEdible.scale += otherEdible.scale / 2;
-                Debug.Log($"Eating before: {prevScale} after: {myEdible.scale}");
+                // Debug.Log($"Eating before: {prevScale} after: {myEdible.scale}");
             }
         }
     }
 
+    public static float GetBoxScale(GameObject obj)
+    {
+        if (!obj.TryGetComponent<BoxCollider>(out var box)) return 0;
+        Vector3 scale = obj.transform.localScale;
+        return scale.x * scale.y * scale.z * box.size.x * box.size.y * box.size.z;
+    }
+
+    public static float GetBoxScale(BoxCollider box)
+    {
+        Vector3 scale = box.transform.localScale;
+        return scale.x * scale.y * scale.z * box.size.x * box.size.y * box.size.z;
+    }
+
     bool ContainsBot2D(BoxCollider mine, BoxCollider other)
     {
-        Vector3 half = other.size * 0.5f;
+        if (GetBoxScale(mine) <= GetBoxScale(other)) return false;
 
-        Vector3[] corners =
-        {
-          new(-half.x, 0, -half.z),
-          new(-half.x, 0,  half.z),
-          new( half.x, 0, -half.z),
-          new( half.x, 0,  half.z),
-        };
+        Vector3 myPos2D = mine.transform.position;
+        myPos2D.y = 0;
+        Vector3 urPos2D = other.transform.position;
+        urPos2D.y = 0;
 
-        Vector3 myHalf = mine.size * 0.5f;
-        Vector3 myMin = mine.center - myHalf;
-        Vector3 myMax = mine.center + myHalf;
+        float dist = Vector3.Distance(myPos2D, urPos2D);
+        float radius = Vector2.Distance(new Vector2(mine.transform.localScale.x * mine.size.x, mine.transform.localScale.z * mine.size.z), Vector2.zero);
+        float threshold = radius * 0.5f;
 
-        foreach (Vector3 corner in corners)
-        {
-            // Corner in world space
-            Vector3 world = other.transform.TransformPoint(other.center + corner);
+        Debug.DrawLine(mine.transform.position, mine.transform.position + Vector3.forward * threshold, Color.yellowNice, 0.02f, false);
 
-            // Convert to this bot's local space
-            Vector3 local = mine.transform.InverseTransformPoint(world);
-
-            // Check only X and Z
-            if (local.x < myMin.x || local.x > myMax.x ||
-                local.z < myMin.z || local.z > myMax.z)
-            {
-                return false;
-            }
-        }
+        if (dist >= threshold) return false;
 
         return true;
     }

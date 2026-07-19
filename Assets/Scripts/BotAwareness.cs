@@ -10,11 +10,11 @@ public class BotAwareness : MonoBehaviour
 
         float dist = Vector3.Distance(bot.transform.position, other.transform.position);
 
-        if (BotController.GetScale(other.gameObject) >= BotController.GetScale(bot.gameObject))
+        if (BotController.GetBoxScale(other.gameObject) >= BotController.GetBoxScale(bot.gameObject))
         {
-            // Debug.Log("[bot] threat");
-            // if (Random.Range(0, 100) == 0)
-            //     Debug.Log($"[bot] threat current {dist} vs closest {bot.closestThreatDist}");
+            bool sentient = other.TryGetComponent<BotController>(out _) || other.TryGetComponent<Player>(out _);
+            if (!sentient) return;
+
             if (dist < bot.closestThreatDist)
             {
                 bot.closestThreatDist = dist;
@@ -23,7 +23,6 @@ public class BotAwareness : MonoBehaviour
         }
         else
         {
-            // Debug.Log("[bot] target");
             if (dist < bot.closestTargetDist)
             {
                 bot.closestTargetDist = dist;
