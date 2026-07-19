@@ -451,6 +451,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 184644755}
     - target: {fileID: 4476504124815070452, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
+      propertyPath: botManager
+      value: 
+      objectReference: {fileID: 973995607}
+    - target: {fileID: 4476504124815070452, guid: c1ec0efca9075c36fbd67cdb18aefef4, type: 3}
       propertyPath: sprintSpeed
       value: 10
       objectReference: {fileID: 0}
@@ -826,7 +830,7 @@ GameObject:
   - component: {fileID: 973995608}
   - component: {fileID: 973995607}
   m_Layer: 0
-  m_Name: BotManager
+  m_Name: BotSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -871,10 +875,11 @@ MonoBehaviour:
   - {fileID: 1863547128783442204, guid: e34248dc50daeaf4193d5d1129f4703f, type: 3}
   botPrefab: {fileID: 6081166618977227607, guid: a7d31e1fcaa8c5b428a99b74dc256448, type: 3}
   botCount: 90
+  cityGenerator: {fileID: 2089838219}
   minX: 0
-  maxX: 500
+  maxX: 525
   minZ: 0
-  maxZ: 500
+  maxZ: 525
   minScale: 1
   maxScale: 5
   awarenessRadius: 5
@@ -1702,6 +1707,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CursorManager
   cursorTexture: {fileID: 2800000, guid: 50075f9ed79547d47b4431a5512d5e91, type: 3}
   hotspot: {x: 0, y: 0}
+--- !u!114 &2089838219 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2568328809734363545, guid: 7d1e9ed3709f652b588d7381b61772dc, type: 3}
+  m_PrefabInstance: {fileID: 701728845}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9978a7de930d753eb9c1f8a49444221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GenerateCity
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

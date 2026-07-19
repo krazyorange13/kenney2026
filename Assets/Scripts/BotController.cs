@@ -99,12 +99,12 @@ public class BotController : MonoBehaviour
         // can't pass borders
         if (spawner != null)
         {
-            if (nextPosition.x < spawner.minX
-            || nextPosition.x > spawner.maxX
-            || nextPosition.z < spawner.minZ
-            || nextPosition.z > spawner.maxZ)
+            if (nextPosition.x < spawner.getMinX()
+            || nextPosition.x > spawner.getMaxX()
+            || nextPosition.z < spawner.getMinZ()
+            || nextPosition.z > spawner.getMaxZ())
             {
-                Vector3 center = new Vector3((spawner.minX + spawner.maxX) / 2f, transform.position.y, (spawner.minZ + spawner.maxZ) / 2f);
+                Vector3 center = new Vector3((spawner.getMinX() + spawner.getMaxX()) / 2f, transform.position.y, (spawner.getMinZ() + spawner.getMaxZ()) / 2f);
                 targetRotation = Quaternion.LookRotation(center - transform.position);
             }
         }

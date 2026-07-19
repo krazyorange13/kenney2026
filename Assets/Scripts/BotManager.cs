@@ -12,10 +12,12 @@ public class BotManager : MonoBehaviour
     public List<GameObject> botPrefabs = new List<GameObject>();
     public GameObject botPrefab;
     public int botCount = 100;
-    public float minX = -10f;
-    public float maxX = 10f;
-    public float minZ = -10f;
-    public float maxZ = 10f;
+
+    public GenerateCity cityGenerator;
+    private float minX;
+    private float maxX;
+    private float minZ;
+    private float maxZ;
     public int minScale = 1;
     public int maxScale = 5;
     public float awarenessRadius = 5.0f;
@@ -27,6 +29,11 @@ public class BotManager : MonoBehaviour
     int nResults;
     void Start()
     {
+        minX = -cityGenerator.tileWidth/2;
+        minZ = -cityGenerator.tileHeight/2;
+        maxX = cityGenerator.tileWidth * cityGenerator.cityWidth - cityGenerator.tileWidth/2;
+        maxZ = cityGenerator.tileHeight * cityGenerator.cityHeight - cityGenerator.tileHeight/2;
+
         for (int i = 0; i < botCount; i++)
         {
             float x = Random.Range(minX, maxX);
@@ -104,5 +111,25 @@ public class BotManager : MonoBehaviour
             BotController botController = bot.GetComponent<BotController>();
             botController.ProcessTriggers(hits);
         }
+    }
+
+    public float getMinX()
+    {
+        return minX;
+    }
+
+    public float getMaxX()
+    {
+        return maxX;
+    }
+
+    public float getMinZ()
+    {
+        return minZ;
+    }
+
+    public float getMaxZ()
+    {
+        return maxZ;
     }
 }

@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI scoreText;
 
     public Slider staminaSlider;
+    public BotManager botManager;
 
     void Start()
     {
@@ -90,12 +91,31 @@ public class Player : MonoBehaviour
 
                 speed *= (float)Math.Pow(speedSizeMult, scale);
 
-                transform.position = Vector3.MoveTowards(
+                Vector3 newPosition = Vector3.MoveTowards(
                     transform.position,
                     target,
                     speed * Time.deltaTime
                 );
 
+                // prevent going outside border
+                if (botManager != null)
+                {
+                    float margin = 0.5f;
+
+                    newPosition.x = Mathf.Clamp(
+                        newPosition.x,
+                        botManager.getMinX() + margin,
+                        botManager.getMaxX() - margin
+                    );
+
+                    newPosition.z = Mathf.Clamp(
+                        newPosition.z,
+                        botManager.getMinZ() + margin,
+                        botManager.getMaxZ() - margin
+                    );
+                }
+
+                transform.position = newPosition;
 
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Slerp(
@@ -109,10 +129,7 @@ public class Player : MonoBehaviour
         if (!Mouse.current.leftButton.isPressed)
         {
             staminaCount += Time.deltaTime * 0.7f;
-            if (staminaCount > staminaTotal)
-            {
-                staminaCount = staminaTotal;
-            }
+            staminaCount = Math.Min(staminaCount, staminaTotal);
         }
 
         staminaSlider.value = staminaCount / staminaTotal;
